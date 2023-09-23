@@ -7,33 +7,11 @@ export function Game () {
 
     const [value,setValue] = useState(5)
     const [size, setSize] = useState(50)
-    const [multiplicador, setMultiplicador] = useState(2)
+    const [multiplicador, setMultiplicador] = useState(1.98)
     const [win,setWin] = useState(50)
 
     function calculateMultiplicador(value) {
-        if (value <= 50) {
-            return ((value * 0.02) + 1).toFixed(2);
-        } else if (value > 50 && value <= 55) {
-            return ((value * 0.03) + 1).toFixed(2);
-        } else if (value > 55 && value <= 60) {
-            return ((value * 0.04) + 1).toFixed(2); 
-        } else if (value > 60 && value <= 65) {
-            return ((value * 0.05) + 1).toFixed(2);
-        } else if (value > 65 && value <= 70) {
-            return ((value * 0.08) + 1).toFixed(2);
-        } else if (value > 70 && value <= 75) {
-            return ((value * 0.1) + 1).toFixed(2);
-        } else if (value > 75 && value <= 80) {
-            return ((value * 0.12) + 1).toFixed(2);
-        } else if(value > 80 && value <= 85) {
-            return ((value * 0.15) + 1).toFixed(2);
-        } else if (value > 85 && value <= 90) {
-            return ((value * 0.18) + 1).toFixed(2);
-        } else if (value > 90 && value <= 95) {
-            return ((value * 0.28) + 1).toFixed(2);
-        } else if (value > 95 && value <= 100) {
-            return ((value * 0.49) + 1).toFixed(2);
-        }
+        return (99/(100-value)).toFixed(4)
     }
 
     function ChanceDeGanhar(value) {
@@ -60,8 +38,9 @@ export function Game () {
                 <View style={styles.spin}>
                     <Slider 
                         style={styles.slider}
-                        minimumValue={1}
-                        maximumValue={99}
+                        minimumValue={2}
+                        maximumValue={98}
+                        step={1}
                         maximumTrackTintColor='green'
                         minimumTrackTintColor='red'
                         thumbTintColor='#000'
@@ -107,11 +86,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#fdfd', 
     },
     operadores: {
-        padding: 5,
+        padding: 10,
         backgroundColor: 'blue',
         color: '#fff',
         borderRadius: 3,
-        border: '1px solid black',
+        height: 40,
+        textAlign: 'center',
     },
     operations:{
         flex: 1,
@@ -119,6 +99,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     containerAll: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
         marginTop: 50,
         marginHorizontal: 10,
     },
@@ -143,21 +126,22 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
     },
     containerFunctions: {
+        width: '90%',
         marginBottom: 20,
-        marginTop: 50,
+        marginTop: 80,
         flex: 1,
+        minHeight: 100,
         flexDirection: 'row',
         justifyContent: 'space-between',
         backgroundColor: '#fdfd',
         marginHorizontal: 20,
         padding: 15,
-        
     },
     gapentry: {
         paddingLeft: 7,
     },
     containerAposta: {
         flex: 1,
-        flexDirection: 'column',
+        flexDirection: 'column'
     }
 })
