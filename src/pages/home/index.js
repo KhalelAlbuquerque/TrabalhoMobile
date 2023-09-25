@@ -1,21 +1,27 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
-import Swiper from 'react-native-swiper'; // Importe o Swiper
+import { View, Text, StyleSheet, Image, Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import Swiper from 'react-native-swiper';
 
 export function Home() {
+  const navigation = useNavigation();
+
   return (
-    <View>
-      <Text style={styles.mainTitle}>
-        Dadinho da <Text style={styles.blaze}>Blaze</Text>
-      </Text>
+    <View style={styles.containerAll}>
+      <View>
+        <Image style={styles.logoTitle} source={require('../../public/img/logoCassino.png')}></Image>
+        <Text style={styles.mainTitle}>
+            Dadinho do <Text style={styles.blaze}>Josue</Text>
+        </Text>
+      </View>
       <View style={styles.containerInfo}>
         <Text style={styles.bestPlat}>A melhor plataforma de jogos</Text>
         <Swiper
           loop={true}
           showsPagination={true}
           style={styles.carrossel}
-          dotStyle={styles.swiperDot} // Adicione um estilo para os pontos de paginação
-          activeDotStyle={styles.swiperActiveDot} // Adicione um estilo para o ponto ativo
+          dotStyle={styles.swiperDot} 
+          activeDotStyle={styles.swiperActiveDot} 
         >
           <View style={styles.blocoCarrossel}>
             <Image
@@ -45,18 +51,40 @@ export function Home() {
                 <Text>e evite danos futuros</Text>
             </View>
           </View>
-        </Swiper>
+          </Swiper>
+      </View>
+
+      <View style={styles.buttonPlay}>
+        <Button
+            title='Jogue agora!'
+            onPress={() => navigation.navigate('Game')}
+            color={'red'}
+        />
+      </View>
+
+      <View style={styles.footer}>
+        <Image style={styles.logoFooter} source={require('../../public/img/logoCassino.png')}></Image>
+        <Text style={styles.footerText}>Dadinho do <Text>Josue</Text></Text>
+        <Text style={styles.footerText}>Todos os direitos reservados</Text>
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  containerAll:{
+    backgroundColor: '#BFACA4'
+  },
+  logoTitle:{
+    marginTop: 80,
+    height: 100,
+    width:100,
+    marginLeft: 'auto',
+    marginRight: 'auto'
+  },   
   mainTitle: {
     textAlign: 'center',
     fontSize: 18,
-    marginTop: 100,
-    margin: 'auto',
     width: '100%',
     fontSize: 32,
   },
@@ -72,9 +100,10 @@ const styles = StyleSheet.create({
     width: '80%',
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginTop: 100,
+    marginTop: 30,
     height: 350,
-    textAlign:'center'
+    textAlign:'center',
+    backgroundColor: '#BFACA4'
   },
   imagemHome: {
     maxHeight: 200,
@@ -82,29 +111,56 @@ const styles = StyleSheet.create({
   },
   imagemHomeShield:{
     maxHeight: 200,
-    width: '65%'
+    width: '65%',
   },
   carrossel: {
-    height: "500px", // Defina a altura do carrossel de acordo com suas necessidades
+    height: "500px", 
   },
   blocoCarrossel: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#BFACA4'
   },
   swiperDot: {
-    backgroundColor: 'gray', // Cor dos pontos de paginação inativos
+    backgroundColor: 'gray', 
     width: 8,
     height: 8,
     borderRadius: 4,
     margin: 3,
   },
   swiperActiveDot: {
-    backgroundColor: 'red', // Cor do ponto de paginação ativo
+    backgroundColor: 'red', 
     width: 8,
     height: 8,
     borderRadius: 4,
     margin: 3,
   },
+  buttonPlay: {
+    width: '80%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
+  footer:{
+    marginTop: 30,
+    width: '80%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    textAlign: 'center',
+    marginBottom: 100
+  },
+  logoFooter:{
+    height: 50,
+    width: 50,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
+  footerText:{
+    textAlign:'center',
+    fontSize: 10,
+    width: 200,
+    marginTop: 3,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  }
 });
