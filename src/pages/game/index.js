@@ -3,7 +3,7 @@ import { View, Text, TextInput, StyleSheet, Button } from 'react-native';
 import Slider from '@react-native-community/slider';
 
 export function Game() {
-    const [balance,setBalance] = useState(0);
+    const [balance,setBalance] = useState(100);
     const [aposta, setAposta] = useState('');
     const [size, setSize] = useState(50);
     const [multiplicador, setMultiplicador] = useState(1.98);
@@ -33,37 +33,46 @@ export function Game() {
         }
     }
 
+    function fazerAposta(e) {
+        e.preventDefault()
 
-    function fazerAposta() {
-        if (aposta) {
-                const numeroAleatorio = Math.random() * 100;
+        const valorAposta = parseFloat(aposta);
+        const saldo = parseFloat(balance);
+
+        if (!isNaN(valorAposta) && valorAposta <= saldo) {
+            if (aposta) {
+                const numeroAleatorio = (Math.random() * 100).toFixed(0);
             if (numeroAleatorio > size) {
-                alert(`Ganhou! Valor que recebeu: ${(aposta * multiplicador).toFixed(2)} Número sorteado: ${ + numeroAleatorio} + `);
+                alert(`Ganhou! Valor que recebeu: R$${(aposta * multiplicador).toFixed(2)} Número sorteado: ${ + numeroAleatorio}`);
+                const novoBalance = (parseFloat(balance) + (aposta * multiplicador)).toFixed(2);
+                setBalance(novoBalance);
             } else {
                 alert('Perdeu! ' + `Número sorteado: ${ + numeroAleatorio}`);
+                const novoBalance = (balance - aposta).toFixed(2);
+                setBalance(novoBalance);
+                }
             }
+        } else if(isNaN(valorAposta)) {
+            alert("Digite um valor para apostar")
         } else {
-            alert('Digite um valor para apostar');
+            alert('Saldo insuficiente');
         }
     }
 
-    useEffect(() => {
-        if (aposta === '') {
-            setLucro(null);
-        } else {
-            handlePress();
-        }
-    }, [aposta, multiplicador]);
+    useEffect(() => handlePress(), [aposta, multiplicador]);
 
     return (
         <View style={styles.containerAll}>
+            <View style={{marginHorizontal: 'auto',backgroundColor: '#360259',marginBottom: 120, alignItems: 'center', padding: 8,borderRadius: 10}}>
+                <Text style={{width: '80%', textAlign: 'center',fontSize: 24,color: '#fdfdfd',fontWeight: 'bold'}}>SALDO: <Text style={{color: '#C291F2'}}>R${balance}</Text></Text>
+            </View>
             <View style={styles.container}>
                 <View style={styles.range}>
-                    <View style={styles.valueContainer}><Text style={styles.valueText}>0</Text></View>
-                    <View style={[styles.valueContainer, styles.entrygap1]}><Text style={styles.valueText}>25</Text></View>
-                    <View style={styles.valueContainer}><Text style={styles.valueText}>50</Text></View>
-                    <View style={[styles.valueContainer, styles.entrygap2]}><Text style={styles.valueText}>75</Text></View>
-                    <View style={styles.valueContainer}><Text style={styles.valueText}>100</Text></View>
+                    <View style={styles.valueContainer}><Text style={[styles.valueText, styles.textStyle2]}>0</Text></View>
+                    <View style={styles.valueContainer}><Text style={[styles.valueText, styles.textStyle2]}>25</Text></View>
+                    <View style={styles.valueContainer}><Text style={[styles.valueText, styles.textStyle2]}>50</Text></View>
+                    <View style={[styles.valueContainer, styles.entrygap2]}><Text style={[styles.valueText, styles.textStyle2]}>75</Text></View>
+                    <View style={styles.valueContainer}><Text style={[styles.valueText, styles.textStyle2]}>100</Text></View>
                 </View>
                 <View style={styles.spin}>
                     <Slider
@@ -79,25 +88,25 @@ export function Game() {
                     />
                 </View>
             </View>
-            <View style={styles.containerFunctions}>
-                <View styles={styles.operations}>
-                    <Text aria-label="Label for Username" nativeID="labelUsername">Multiplicador</Text>
+            <View style={[styles.containerFunctions]}>
+                <View styles={[styles.operations]}>
+                    <Text style={[styles.textStyle2,{marginBottom: 5}]} aria-label="Label for Username" nativeID="labelUsername">Multiplicador</Text>
                     <Text style={styles.operadores}>{multiplicador}</Text>
                 </View>
                 <View>
-                    <Text aria-label="Label for Username" nativeID="labelUsername">Rolar Acima</Text>
+                    <Text style={[styles.textStyle2,{marginBottom: 5}]} aria-label="Label for Username" nativeID="labelUsername">Rolar Acima</Text>
                     <Text style={styles.operadores}>{size}</Text>
                 </View>
                 <View>
-                    <Text aria-label="Label for Username" nativeID="labelUsername">Chance de vitória</Text>
+                    <Text style={[styles.textStyle2,{marginBottom: 5}]} aria-label="Label for Username" nativeID="labelUsername">Chance de vitória</Text>
                     <Text style={styles.operadores}>{win}</Text>
                 </View>
             </View>
 
-            <View style={{ width: '100%', backgroundColor: '#fdfd', paddingHorizontal: 20 }}>
+            <View style={{ width: '100%', backgroundColor: '#2C3673', paddingHorizontal: 20, paddingTop: 10, paddingBottom: 20 }}>
                 <View style={styles.apostaEntry}>
-                    <Text>Valor da Aposta</Text>
-                    <Text> US$ {+aposta}</Text>
+                    <Text style={[styles.textStyle2, {marginBottom: 7}]}>Valor da Aposta</Text>
+                    <Text style={styles.textStyle2}> SALDO R$ {balance}</Text>
                 </View>
                 <View>
                     <TextInput
@@ -108,21 +117,29 @@ export function Game() {
                         keyboardType="numeric"
                     />
                 </View>
-                <Button title="Apostar" onPress={fazerAposta} />
-            </View>
-            <View style={{ width: '100%', backgroundColor: '#fdfd', paddingHorizontal: 20 }}>
-                <Text style={styles.apostaEntry}>
-                    Lucro na vitória
-                </Text>
-                <Text style={{backgroundColor: 'blue', padding: 10}}>
-                    {lucro ? `US$ ${lucro}` : '0.00'}
-                </Text>
+                <Button style={{borderRadius: 15}} title="Apostar" onPress={fazerAposta} />
+                <View style={{ width: '100%'}}>
+                    <Text style={[styles.apostaEntry,styles.textStyle2,{marginTop: 7,marginBottom: 7}]}>
+                        Lucro na vitória
+                    </Text>
+                    <Text style={[{backgroundColor: '#360259', padding: 10, borderRadius: 5, color: 'white',fontWeight: 'bold'}]}>
+                        {lucro ? `R$ ${lucro}` : '0.00'}
+                    </Text>
+                </View>
             </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
+    textStyle1: {
+        color: '#C291F2'
+    },
+    textStyle2: {
+        fontSize: 15,
+        fontWeight: 'bold',
+        color: '#3DADF2'
+    },
     apostaEntry: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -136,8 +153,9 @@ const styles = StyleSheet.create({
         borderRadius: 50,
     },
     inputAposta: {
+        borderRadius: 5,
         width: '70%',
-        backgroundColor: 'green',
+        backgroundColor: '#078C03',
         height: 40,
         paddingHorizontal: 10,
         marginBottom: 20,
@@ -151,11 +169,12 @@ const styles = StyleSheet.create({
     },
     operadores: {
         padding: 10,
-        backgroundColor: 'blue',
+        backgroundColor: '#360259',
         color: '#fff',
         borderRadius: 3,
         height: 40,
         textAlign: 'center',
+        fontWeight: 'bold',
     },
     operations: {
         flex: 1,
@@ -166,7 +185,10 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        marginTop: 80,
+        paddingTop: 65,
+        backgroundColor: '#270140',
+        height: '100%',
+        paddingBottom: 150,
     },
     slider: {
         width: '100%',
@@ -188,10 +210,11 @@ const styles = StyleSheet.create({
         width: '110%',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginBottom: 20,
+        marginBottom: 25,
         paddingHorizontal: 20,
     },
     containerFunctions: {
+        borderRadius: 8,
         width: '90%',
         marginBottom: 20,
         marginTop: 80,
@@ -199,7 +222,7 @@ const styles = StyleSheet.create({
         minHeight: 100,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        backgroundColor: '#fdfd',
+        backgroundColor: '#2C3673',
         marginHorizontal: 20,
         padding: 15,
     },
