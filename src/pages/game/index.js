@@ -36,6 +36,10 @@ export function Game() {
     function fazerAposta(e) {
         e.preventDefault()
 
+        if(aposta.includes(',')) {
+            alert("Digite um numero sem vírgulas!")
+            return
+        }
         const valorAposta = parseFloat(aposta);
         const saldo = parseFloat(balance);
 
@@ -52,7 +56,7 @@ export function Game() {
                 setBalance(novoBalance);
                 }
             }
-        } else if(isNaN(valorAposta)) {
+        }else if(isNaN(valorAposta)) {
             alert("Digite um valor para apostar")
         } else {
             alert('Saldo insuficiente');
