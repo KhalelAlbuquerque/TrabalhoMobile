@@ -67,7 +67,7 @@ export function Game() {
 
     return (
         <View style={styles.containerAll}>
-            <View style={{marginHorizontal: 'auto',backgroundColor: '#360259',marginBottom: 120, alignItems: 'center', padding: 8,borderRadius: 10}}>
+            <View style={{marginHorizontal: 'auto',backgroundColor: '#360259',marginBottom: 40, alignItems: 'center', padding: 8,borderRadius: 10}}>
                 <Text style={{width: '80%', textAlign: 'center',fontSize: 24,color: '#fdfdfd',fontWeight: 'bold'}}>SALDO: <Text style={{color: '#C291F2'}}>R${balance}</Text></Text>
             </View>
             <View style={styles.container}>
@@ -121,7 +121,7 @@ export function Game() {
                         keyboardType="numeric"
                     />
                 </View>
-                <Button style={{borderRadius: 15}} title="Apostar" onPress={fazerAposta} />
+                <Button style={{borderRadius: 15}} color={'green'} title="Apostar" onPress={fazerAposta} />
                 <View style={{ width: '100%'}}>
                     <Text style={[styles.apostaEntry,styles.textStyle2,{marginTop: 7,marginBottom: 7}]}>
                         Lucro na vitória
@@ -129,6 +129,23 @@ export function Game() {
                     <Text style={[{backgroundColor: '#360259', padding: 10, borderRadius: 5, color: 'white',fontWeight: 'bold'}]}>
                         {lucro ? `R$ ${lucro}` : '0.00'}
                     </Text>
+                </View>
+            </View>
+            <View>
+                <View style={styles.howToContainer}>
+                    <Text style={styles.howToTitle}>Como jogar</Text>
+                    <View style={styles.howToDescContainer}>
+                        <Text style={styles.howToDesc}>Coloque o valor que deseja apostar no campo "Valor da aposta."</Text>
+                        <Text style={styles.howToDesc}>Após isso, deslize a barra escolhendo o valor do dado que deseja apostar.</Text>
+                    </View>
+                </View>
+                <View style={styles.howToContainer}>
+                    <Text style={styles.howToTitle}>Como funciona</Text>
+                    <View style={styles.howToDescContainer}>
+                        <Text style={styles.howToDesc}>Com o número do dado escolhido pra escolhido pra aposta</Text>
+                        <Text style={styles.howToDesc}>clique em "Apostar", caso o número que caia seja abaixo do número escolhido</Text>
+                        <Text style={styles.howToDesc}>você perde, caso contrário, você ganha!</Text>
+                    </View>
                 </View>
             </View>
         </View>
@@ -197,19 +214,23 @@ const styles = StyleSheet.create({
         paddingBottom: 150,
     },
     slider: {
-        width: '100%',
+        width: '90%',
+        marginTop: 'auto',
+        marginBottom: 'auto',
+        marginLeft: 'auto',
+        marginRight: 'auto',
     },
     spin: {
-        height: 40,
+        height: 50,
         backgroundColor: '#fdfd',
-        borderRadius: 50,
-        paddingTop: 10,
+        borderRadius: 40,
     },
     container: {
         flex: 1,
         width: '90%',
         margin: 'auto',
         marginHorizontal: 20,
+        marginBottom: 10
     },
     range: {
         flex: 1,
@@ -236,6 +257,35 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         width: '110%',
+    },
+    howToContainer:{
+        width: 350,
+        height: 130,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        backgroundColor: '#2C3673',
+        borderRadius: 10,
+        marginTop: 10
+    },
+    howToTitle:{        
+        color: '#3DADF2',
+        fontSize: 28,
+        fontWeight:'bold',            
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        marginBottom: 5,
+        marginTop: 5
+    },
+    howToDescContainer:{
+        width:'70%',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+    },
+    howToDesc:{
+        color: 'white',
+        width: '100%',
+        textAlign:'center',
+        marginBottom: 2
     }
 });
 
