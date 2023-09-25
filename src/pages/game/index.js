@@ -155,10 +155,12 @@ const styles = StyleSheet.create({
     inputAposta: {
         borderRadius: 5,
         width: '70%',
-        backgroundColor: '#078C03',
+        backgroundColor: '#360259',
         height: 40,
         paddingHorizontal: 10,
         marginBottom: 20,
+        color: 'white',
+        fontWeight: 'bold',
     },
     Aposta: {
         flexDirection: 'column',
