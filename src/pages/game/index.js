@@ -9,6 +9,7 @@ export function Game() {
     const [multiplicador, setMultiplicador] = useState(1.98);
     const [win, setWin] = useState(50);
     const [lucro, setLucro] = useState(null);
+    const [valorTextInput, setValorTextInput] = useState(size.toString());
 
     function calculateMultiplicador(value) {
         return (99 / (100 - value)).toFixed(4);
@@ -23,6 +24,8 @@ export function Game() {
         const novoMultiplicador = calculateMultiplicador(value);
         setMultiplicador(novoMultiplicador);
         setWin(ChanceDeGanhar(value).toFixed(2));
+        const novoValor = parseFloat(value)
+        setValorTextInput(novoValor.toFixed(0))
     }
 
     function handlePress() {
@@ -63,7 +66,31 @@ export function Game() {
         }
     }
 
-    useEffect(() => handlePress(), [aposta, multiplicador]);
+    function handleTextInputChange(text) {
+        setValorTextInput(text);
+      
+        const novoValor = parseFloat(text);
+        if (!isNaN(novoValor)) {
+          if (novoValor >= 2 && novoValor <= 98) {
+            setSize(novoValor);
+            const novoMultiplicador = calculateMultiplicador(novoValor);
+            setMultiplicador(novoMultiplicador);
+            setWin(ChanceDeGanhar(novoValor).toFixed(2));
+          } else {
+            alert("Digite um número de 2 á 98")
+            setSize(50)
+            setMultiplicador(calculateMultiplicador(50))
+            setWin(ChanceDeGanhar(50).toFixed(2))
+          }
+        } else {
+            setSize(50)
+            setMultiplicador(calculateMultiplicador(50))
+            setWin(ChanceDeGanhar(50).toFixed(2))
+
+        }
+      }
+
+    useEffect(() => handlePress(), [aposta, multiplicador,size]);
 
     return (
         <ScrollView style={styles.containerAll}>
@@ -99,7 +126,14 @@ export function Game() {
                 </View>
                 <View styles={[styles.operations]}>
                     <Text style={[styles.textStyle2,{marginBottom: 5}]} aria-label="Label for Username" nativeID="labelUsername">Rolar Acima</Text>
-                    <Text style={styles.operadores}>{size}</Text>
+                    <TextInput
+                        value={valorTextInput}
+                        placeholder={size.toString()}
+                        style={styles.operadores}
+                        onChangeText={handleTextInputChange}
+                        keyboardType="numeric"
+                        placeholderTextColor="#fff"
+                        />
                 </View>
                 <View styles={[styles.operations]}>
                     <Text style={[styles.textStyle2,{marginBottom: 5}]} aria-label="Label for Username" nativeID="labelUsername">Chance de vitória</Text>
