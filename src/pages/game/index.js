@@ -67,7 +67,7 @@ export function Game() {
 
     return (
         <ScrollView style={styles.containerAll}>
-            <View style={{marginHorizontal: 'auto',backgroundColor: '#360259',marginBottom: 40, alignItems: 'center', padding: 8,borderRadius: 10}}>
+            <View style={{marginLeft:'auto', marginRight: 'auto',backgroundColor: '#360259',marginBottom: 40, alignItems: 'center', padding: 8,borderRadius: 10}}>
                 <Text style={{width: '80%', textAlign: 'center',fontSize: 24,color: '#fdfdfd',fontWeight: 'bold'}}>SALDO: <Text style={{color: '#C291F2'}}>R${balance}</Text></Text>
             </View>
             <View style={styles.container}>
@@ -86,7 +86,7 @@ export function Game() {
                         step={1}
                         maximumTrackTintColor='green'
                         minimumTrackTintColor='red'
-                        thumbTintColor='#000'
+                        thumbTintColor='white'
                         value={size}
                         onValueChange={handleChange}
                     />
@@ -97,11 +97,11 @@ export function Game() {
                     <Text style={[styles.textStyle2,{marginBottom: 5}]} aria-label="Label for Username" nativeID="labelUsername">Multiplicador</Text>
                     <Text style={styles.operadores}>{multiplicador}</Text>
                 </View>
-                <View>
+                <View styles={[styles.operations]}>
                     <Text style={[styles.textStyle2,{marginBottom: 5}]} aria-label="Label for Username" nativeID="labelUsername">Rolar Acima</Text>
                     <Text style={styles.operadores}>{size}</Text>
                 </View>
-                <View>
+                <View styles={[styles.operations]}>
                     <Text style={[styles.textStyle2,{marginBottom: 5}]} aria-label="Label for Username" nativeID="labelUsername">Chance de vitória</Text>
                     <Text style={styles.operadores}>{win}</Text>
                 </View>
@@ -237,14 +237,12 @@ const styles = StyleSheet.create({
         width: '110%',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginBottom: 25,
         paddingHorizontal: 20,
     },
     containerFunctions: {
         borderRadius: 8,
         width: '90%',
         marginBottom: 20,
-        marginTop: 80,
         flex: 1,
         minHeight: 100,
         flexDirection: 'row',
