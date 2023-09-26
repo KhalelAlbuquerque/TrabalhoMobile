@@ -36,13 +36,21 @@ export function Game() {
         }
     }
 
+
     function fazerAposta(e) {
         e.preventDefault()
-
-        if(aposta.includes(',')) {
+        if(aposta.includes(',') || valorTextInput.includes(',')) {
             alert("Digite um numero sem vírgulas!")
-            return
+            return 0
+        } else if(valorTextInput<2 || valorTextInput>98){
+            setValorTextInput('50');
+            alert("Digite um número de 2 á 98")
+            setSize(50)
+            setMultiplicador(calculateMultiplicador(50))
+            setWin(ChanceDeGanhar(50).toFixed(2))
+            return 0
         }
+
         const valorAposta = parseFloat(aposta);
         const saldo = parseFloat(balance);
 
@@ -51,7 +59,7 @@ export function Game() {
                 const numeroAleatorio = (Math.random() * 100).toFixed(0);
             if (numeroAleatorio > size) {
                 alert(`Ganhou! Valor que recebeu: R$${(aposta * multiplicador).toFixed(2)} Número sorteado: ${ + numeroAleatorio}`);
-                const novoBalance = (parseFloat(balance) + (aposta * multiplicador)).toFixed(2);
+                const novoBalance = (parseFloat(balance) + (aposta * multiplicador - aposta)).toFixed(2);
                 setBalance(novoBalance);
             } else {
                 alert('Perdeu! ' + `Número sorteado: ${ + numeroAleatorio}`);
@@ -61,7 +69,7 @@ export function Game() {
             }
         }else if(isNaN(valorAposta)) {
             alert("Digite um valor para apostar")
-        } else {
+        }else{
             alert('Saldo insuficiente');
         }
     }
@@ -71,17 +79,10 @@ export function Game() {
       
         const novoValor = parseFloat(text);
         if (!isNaN(novoValor)) {
-          if (novoValor >= 2 && novoValor <= 98) {
             setSize(novoValor);
             const novoMultiplicador = calculateMultiplicador(novoValor);
             setMultiplicador(novoMultiplicador);
             setWin(ChanceDeGanhar(novoValor).toFixed(2));
-          } else {
-            alert("Digite um número de 2 á 98")
-            setSize(50)
-            setMultiplicador(calculateMultiplicador(50))
-            setWin(ChanceDeGanhar(50).toFixed(2))
-          }
         } else {
             setSize(50)
             setMultiplicador(calculateMultiplicador(50))
