@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, StyleSheet, Button } from 'react-native';
+import { View, ScrollView , Text, TextInput, StyleSheet, Button } from 'react-native';
 import Slider from '@react-native-community/slider';
 
 export function Game() {
@@ -66,7 +66,7 @@ export function Game() {
     useEffect(() => handlePress(), [aposta, multiplicador]);
 
     return (
-        <View style={styles.containerAll}>
+        <ScrollView style={styles.containerAll}>
             <View style={{marginHorizontal: 'auto',backgroundColor: '#360259',marginBottom: 40, alignItems: 'center', padding: 8,borderRadius: 10}}>
                 <Text style={{width: '80%', textAlign: 'center',fontSize: 24,color: '#fdfdfd',fontWeight: 'bold'}}>SALDO: <Text style={{color: '#C291F2'}}>R${balance}</Text></Text>
             </View>
@@ -139,16 +139,18 @@ export function Game() {
                         <Text style={styles.howToDesc}>Após isso, deslize a barra escolhendo o valor do dado que deseja apostar.</Text>
                     </View>
                 </View>
-                <View style={styles.howToContainer}>
+                <View style={[styles.howToContainer, styles.lastContainer]}>
                     <Text style={styles.howToTitle}>Como funciona</Text>
                     <View style={styles.howToDescContainer}>
-                        <Text style={styles.howToDesc}>Com o número do dado escolhido pra escolhido pra aposta</Text>
-                        <Text style={styles.howToDesc}>clique em "Apostar", caso o número que caia seja abaixo do número escolhido</Text>
-                        <Text style={styles.howToDesc}>você perde, caso contrário, você ganha!</Text>
+                        <Text style={styles.howToDesc}>
+                            Com o número do dado escolhido pra escolhido pra aposta
+                            clique em "Apostar", caso o número que caia seja abaixo
+                            do número escolhido você perde, caso contrário, você ganha!
+                        </Text>
                     </View>
                 </View>
             </View>
-        </View>
+        </ScrollView>
     )
 }
 
@@ -207,11 +209,9 @@ const styles = StyleSheet.create({
     containerAll: {
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
         paddingTop: 65,
         backgroundColor: '#270140',
         height: '100%',
-        paddingBottom: 150,
     },
     slider: {
         width: '90%',
@@ -260,7 +260,7 @@ const styles = StyleSheet.create({
     },
     howToContainer:{
         width: 350,
-        height: 130,
+        height: 140,
         marginLeft: 'auto',
         marginRight: 'auto',
         backgroundColor: '#2C3673',
@@ -269,7 +269,7 @@ const styles = StyleSheet.create({
     },
     howToTitle:{        
         color: '#3DADF2',
-        fontSize: 28,
+        fontSize: 32,
         fontWeight:'bold',            
         marginLeft: 'auto',
         marginRight: 'auto',
@@ -285,7 +285,12 @@ const styles = StyleSheet.create({
         color: 'white',
         width: '100%',
         textAlign:'center',
-        marginBottom: 2
+        marginBottom: 2,
+        fontSize: 14
+    },
+    lastContainer:{
+        marginBottom: 130,
+        height: 160
     }
 });
 

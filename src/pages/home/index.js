@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, Button } from 'react-native';
+import { View, Text, StyleSheet, ScrollView , Image, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Swiper from 'react-native-swiper';
 
@@ -7,7 +7,7 @@ export function Home() {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.containerAll}>
+    <ScrollView style={styles.containerAll}>
       <View>
         <Image style={styles.logoTitle} source={require('../../public/img/logoCassino.png')}></Image>
         <Text style={styles.mainTitle}>
@@ -67,7 +67,7 @@ export function Home() {
         <Text style={styles.footerText}>Dadinho do <Text>Josue</Text></Text>
         <Text style={styles.footerText}>Todos os direitos reservados</Text>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
