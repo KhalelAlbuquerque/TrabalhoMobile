@@ -42,13 +42,6 @@ export function Game() {
         if(aposta.includes(',') || valorTextInput.includes(',')) {
             alert("Digite um numero sem vírgulas!")
             return 0
-        } else if(valorTextInput<2 || valorTextInput>98){
-            setValorTextInput('50');
-            alert("Digite um número de 2 á 98")
-            setSize(50)
-            setMultiplicador(calculateMultiplicador(50))
-            setWin(ChanceDeGanhar(50).toFixed(2))
-            return 0
         }
 
         const valorAposta = parseFloat(aposta);
@@ -78,15 +71,22 @@ export function Game() {
         setValorTextInput(text);
       
         const novoValor = parseFloat(text);
-        if (!isNaN(novoValor)) {
+        if (!isNaN(novoValor) && novoValor>=2 && novoValor<=98 ) {
             setSize(novoValor);
             const novoMultiplicador = calculateMultiplicador(novoValor);
             setMultiplicador(novoMultiplicador);
             setWin(ChanceDeGanhar(novoValor).toFixed(2));
-        } else {
+        } else if(novoValor<0 || novoValor>98){
+            setValorTextInput('50');
+            alert("Digite um número de 2 á 98")
             setSize(50)
             setMultiplicador(calculateMultiplicador(50))
             setWin(ChanceDeGanhar(50).toFixed(2))
+            return 0
+        } else {
+            setSize('--')
+            setMultiplicador('--')
+            setWin('--')
 
         }
       }
