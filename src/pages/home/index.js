@@ -11,7 +11,7 @@ export function Home() {
       <View>
         <Image style={styles.logoTitle} source={require('../../public/img/logoCassino.png')}></Image>
         <Text style={styles.mainTitle}>
-            Dadinho do <Text style={styles.blaze}>Josue</Text>
+            Dadinho do <Text style={styles.blaze}>Blabla</Text>
         </Text>
       </View>
       <View style={styles.containerInfo}>
@@ -64,7 +64,7 @@ export function Home() {
 
       <View style={styles.footer}>
         <Image style={styles.logoFooter} source={require('../../public/img/logoCassino.png')}></Image>
-        <Text style={styles.footerText}>Dadinho do <Text>Josue</Text></Text>
+        <Text style={styles.footerText}>Dadinho do <Text>Blabla</Text></Text>
         <Text style={styles.footerText}>Todos os direitos reservados</Text>
       </View>
     </ScrollView>

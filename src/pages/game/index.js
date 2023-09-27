@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { View, ScrollView , Text, TextInput, StyleSheet, Button } from 'react-native';
+import { View, ScrollView , Text, TextInput, StyleSheet, Button, TouchableOpacity } from 'react-native';
 import Slider from '@react-native-community/slider';
+import { useNavigation } from '@react-navigation/native';
 
 export function Game() {
+    const navigation = useNavigation()
+
     const [balance,setBalance] = useState(100);
     const [aposta, setAposta] = useState('');
     const [size, setSize] = useState(50);
@@ -10,6 +13,8 @@ export function Game() {
     const [win, setWin] = useState(50);
     const [lucro, setLucro] = useState(null);
     const [valorTextInput, setValorTextInput] = useState(size.toString());
+    const [mostrarOpcoes, setMostrarOpcoes] = useState(false)
+    const [arrowSaldo, setArrowSaldo] = useState('▼')
 
     function calculateMultiplicador(value) {
         return (99 / (100 - value)).toFixed(4);
@@ -34,6 +39,11 @@ export function Game() {
             const lucroAposta = (valorNumerico * multiplicador) - valorNumerico;
             setLucro(lucroAposta.toFixed(2));
         }
+    }
+
+    function toggleOptions (){
+        setMostrarOpcoes(!mostrarOpcoes)
+        arrowSaldo==='▼' ? setArrowSaldo('▲') : setArrowSaldo('▼')
     }
 
 
@@ -95,9 +105,40 @@ export function Game() {
 
     return (
         <ScrollView style={styles.containerAll}>
-            <View style={{marginLeft:'auto', marginRight: 'auto',backgroundColor: '#360259',marginBottom: 40, alignItems: 'center', padding: 8,borderRadius: 10}}>
-                <Text style={{width: '80%', textAlign: 'center',fontSize: 24,color: '#fdfdfd',fontWeight: 'bold'}}>SALDO: <Text style={{color: '#C291F2'}}>R${balance}</Text></Text>
+            <View style={styles.voltar}>
+                <Button
+                    title='Voltar'
+                    onPress={() => navigation.navigate('Home')}
+                    color={'transparent'}
+                />
             </View>
+
+            <TouchableOpacity  onPress={toggleOptions}  style={{marginLeft:'auto', marginRight: 'auto',backgroundColor: '#360259',marginBottom: 40, alignItems: 'center', padding: 8,borderRadius: 10}}>
+                <Text style={{width: '80%', textAlign: 'center',fontSize: 24,color: '#fdfdfd',fontWeight: 'bold'}}>
+                    SALDO: <Text style={{color: '#C291F2'}}>R${balance} <Text style={{color:'lightgray'}}>{arrowSaldo}</Text></Text>
+                </Text>
+                
+                {mostrarOpcoes && (
+                    <View>
+                        <View style={{marginBottom: 5}}>
+                            <Button
+                                style={{textAlign: 'center', fontWeight: 'bold'}}
+                                title='Depositar'
+                                onPress={() => navigation.navigate('Deposito')}
+                                color={'purple'}
+                            />
+                        </View>       
+                        <View>
+                            <Button
+                                title='Sacar'
+                                onPress={() => navigation.navigate('Saque')}
+                                color={'purple'}
+                            />
+                        </View>
+                    </View>
+                )}
+            </TouchableOpacity>
+
             <View style={styles.container}>
                 <View style={styles.range}>
                     <View style={styles.valueContainer}><Text style={[styles.valueText, styles.textStyle2]}>0</Text></View>
@@ -197,6 +238,11 @@ const styles = StyleSheet.create({
         fontSize: 15,
         fontWeight: 'bold',
         color: '#3DADF2'
+    },
+    voltar:{
+        width: 100,
+        position: 'absolute'
+        
     },
     apostaEntry: {
         flexDirection: 'row',
