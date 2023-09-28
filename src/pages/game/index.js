@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { View, ScrollView , Text, TextInput, StyleSheet, Button, TouchableOpacity, Image } from 'react-native';
+import { View, ScrollView , Text, TextInput, StyleSheet, Button, TouchableOpacity, Image, Modal } from 'react-native';
 import Slider from '@react-native-community/slider';
 import { useNavigation } from '@react-navigation/native';
+import { ModalDep } from './components/ModalDep';
+import { ModalSaq } from './components/ModalSaq';
 
 export function Game() {
     const navigation = useNavigation()
@@ -16,6 +18,9 @@ export function Game() {
     const [mostrarOpcoes, setMostrarOpcoes] = useState(false)
     const [arrowSaldo, setArrowSaldo] = useState('▼')
     const [diceRoll, setDiceRoll] = useState(false)
+    const [modalDep,setModalDep] = useState(false)
+    const [modalSaq,setModalSaq] = useState(false)
+
 
     function calculateMultiplicador(value) {
         return (99 / (100 - value)).toFixed(4);
@@ -123,7 +128,6 @@ export function Game() {
                     color={'transparent'}
                 />
             </View>
-
             <TouchableOpacity  onPress={toggleOptions}  style={{marginLeft:'auto', marginRight: 'auto',backgroundColor: '#360259',marginBottom: 40, alignItems: 'center', padding: 8,borderRadius: 10}}>
                 <Text style={{width: '80%', textAlign: 'center',fontSize: 24,color: '#fdfdfd',fontWeight: 'bold'}}>
                     SALDO: <Text style={{color: '#C291F2'}}>R${balance} <Text style={{color:'lightgray'}}>{arrowSaldo}</Text></Text>
@@ -135,14 +139,15 @@ export function Game() {
                             <Button
                                 style={{textAlign: 'center', fontWeight: 'bold'}}
                                 title='Depositar'
-                                onPress={() => navigation.navigate('Deposito')}
+                                onPress={() => setModalDep(true)}
                                 color={'purple'}
                             />
-                        </View>       
+                        </View>
                         <View>
                             <Button
+                                style={{textAlign: 'center', fontWeight: 'bold'}}
                                 title='Sacar'
-                                onPress={() => navigation.navigate('Saque')}
+                                onPress={() => setModalSaq(true)}
                                 color={'purple'}
                             />
                         </View>
@@ -246,6 +251,12 @@ export function Game() {
                     </View>
                 </View>
             </View>
+            <Modal visible={modalDep} animationType='fade' transparent={true}>
+                <ModalDep balance={balance} setBalance={setBalance} setModalDep={setModalDep}/>
+            </Modal>
+            <Modal visible={modalSaq} animationType='fade' transparent={true}>
+                <ModalSaq balance={balance} setBalance={setBalance} setModalSaq={setModalSaq}/>
+            </Modal>
         </ScrollView>
     )
 }
