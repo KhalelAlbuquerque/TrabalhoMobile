@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, ScrollView , Text, TextInput, StyleSheet, Button, TouchableOpacity } from 'react-native';
+import { View, ScrollView , Text, TextInput, StyleSheet, Button, TouchableOpacity, Image } from 'react-native';
 import Slider from '@react-native-community/slider';
 import { useNavigation } from '@react-navigation/native';
 
@@ -15,6 +15,7 @@ export function Game() {
     const [valorTextInput, setValorTextInput] = useState(size.toString());
     const [mostrarOpcoes, setMostrarOpcoes] = useState(false)
     const [arrowSaldo, setArrowSaldo] = useState('▼')
+    const [diceRoll, setDiceRoll] = useState(false)
 
     function calculateMultiplicador(value) {
         return (99 / (100 - value)).toFixed(4);
@@ -58,18 +59,21 @@ export function Game() {
         const saldo = parseFloat(balance);
 
         if (!isNaN(valorAposta) && valorAposta <= saldo) {
-            if (aposta) {
-                const numeroAleatorio = (Math.random() * 100).toFixed(0);
-            if (numeroAleatorio > size) {
-                alert(`Ganhou! Valor que recebeu: R$${(aposta * multiplicador).toFixed(2)} Número sorteado: ${ + numeroAleatorio}`);
-                const novoBalance = (parseFloat(balance) + (aposta * multiplicador - aposta)).toFixed(2);
-                setBalance(novoBalance);
-            } else {
-                alert('Perdeu! ' + `Número sorteado: ${ + numeroAleatorio}`);
-                const novoBalance = (balance - aposta).toFixed(2);
-                setBalance(novoBalance);
+            rollDice()
+            setTimeout(() => {
+                if (aposta) {
+                    const numeroAleatorio = (Math.random() * 100).toFixed(0);
+                if (numeroAleatorio > size) {
+                    alert(`Ganhou! Valor que recebeu: R$${(aposta * multiplicador).toFixed(2)} Número sorteado: ${ + numeroAleatorio}`);
+                    const novoBalance = (parseFloat(balance) + (aposta * multiplicador - aposta)).toFixed(2);
+                    setBalance(novoBalance);
+                } else {
+                    alert('Perdeu! ' + `Número sorteado: ${ + numeroAleatorio}`);
+                    const novoBalance = (balance - aposta).toFixed(2);
+                    setBalance(novoBalance);
+                    }
                 }
-            }
+            }, 100);
         }else if(isNaN(valorAposta)) {
             alert("Digite um valor para apostar")
         }else{
@@ -100,6 +104,13 @@ export function Game() {
 
         }
       }
+
+    function rollDice(){
+        setDiceRoll(true)
+        setTimeout(() => {
+            setDiceRoll(false)
+        }, 1600);
+    }
 
     useEffect(() => handlePress(), [aposta, multiplicador,size]);
 
@@ -140,6 +151,15 @@ export function Game() {
             </TouchableOpacity>
 
             <View style={styles.container}>
+
+                {diceRoll
+                    ? (
+                    <Image style={{marginLeft:'auto', marginRight:'auto'}} source={require('../../public/img/dadoGif.gif')}/>
+                    ) : (        
+                    <Image style={{marginLeft:'auto', marginRight:'auto'}} source={require('../../public/img/frame-01.gif')}/>
+                    )
+                }
+
                 <View style={styles.range}>
                     <View style={styles.valueContainer}><Text style={[styles.valueText, styles.textStyle2]}>0</Text></View>
                     <View style={styles.valueContainer}><Text style={[styles.valueText, styles.textStyle2]}>25</Text></View>
