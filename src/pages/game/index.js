@@ -56,7 +56,7 @@ export function Game() {
     function fazerAposta(e) {
         e.preventDefault()
         if(aposta.includes(',') || valorTextInput.includes(',')) {
-            alert("Digite um numero sem vírgulas!")
+            alert("Digite um numero sem vírgulas! (Use ponto)")
             return 0
         }
 

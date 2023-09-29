@@ -3,19 +3,24 @@ import { View, Text, TextInput, StyleSheet, Button, TouchableOpacity } from 'rea
 
 export function ModalSaq({ balance, setBalance, setModalSaq }) {
 
-    const [removeBalance, setRemoveBalance] = useState(0)
+    const [removeBalance, setRemoveBalance] = useState('')
 
     function handleClick() {
-        if(removeBalance.includes(',')){
-            alert("Digite um número sem virgulas pra saque")
+        if(isNaN(removeBalance)){
+            alert("Digite um valor válido pra saque")
             return
         }
-        const novoValor = parseFloat(removeBalance)
+        if(removeBalance.includes(',')){
+            alert("Digite um número sem virgulas pra saque (use ponto)")
+            return
+        }
+        const novoValor = parseFloat(removeBalance).toFixed(2)
         if((parseFloat(balance) - parseFloat(novoValor)<0)){
             alert("Saldo insuficiente pra saque")
             return
-        }else if(isNaN(novoValor)){
+        }else if(isNaN(novoValor) || novoValor == 0){
             alert("Digite um valor válido pra saque")
+            return
         }
         setModalSaq(false)
         setBalance(parseFloat(balance) - parseFloat(novoValor))

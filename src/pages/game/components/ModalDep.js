@@ -3,11 +3,28 @@ import React, { useState } from 'react';
 
 export function ModalDep({balance,setBalance,setModalDep}) {
 
-    const [adcBalance, setAdcBalance] = useState(0)
+    const [adcBalance, setAdcBalance] = useState('')
 
     function handleClick () {
+        if(isNaN(adcBalance)){
+            alert("Digite um valor válido pra deposito")
+            return
+        }
+        if(adcBalance.includes(',')){
+            alert("Digite um número sem virgulas pra deposito (use ponto)")
+            return
+        }
+        const novoValor = parseFloat(adcBalance).toFixed(2)
+        if((parseFloat(balance) + parseFloat(novoValor)>1000)){
+            alert("Saldo maximo na plataforma: R$ 1000")
+            return
+        }else if(isNaN(novoValor) || novoValor == 0){
+            alert("Digite um valor válido pra deposito")
+            return
+        }
         setModalDep(false)
         setBalance(parseFloat(balance) + parseFloat(adcBalance))
+        alert("Deposito realizado!")
     }
 
     return (
@@ -25,7 +42,12 @@ export function ModalDep({balance,setBalance,setModalDep}) {
                     style={styles.TextInput}
                     value={adcBalance.toString()}
                     placeholder="Digite um valor que queira depositar"
-                    onChangeText={(text) => setAdcBalance(Number(text))}
+                    onChangeText={(text) => {
+                        if (text.charAt(0) === '0') {
+                            text = text.substring(1)
+                        }
+                        setAdcBalance(text);
+                    }}
                     keyboardType="numeric"
                     placeholderTextColor="gray"
                     onSubmitEditing={handleClick}
