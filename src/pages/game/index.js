@@ -78,7 +78,7 @@ export function Game() {
                     setBalance(novoBalance);
                     }
                 }
-            }, 100);
+            }, 1400);
         }else if(isNaN(valorAposta)) {
             alert("Digite um valor para apostar")
         }else{
@@ -114,7 +114,7 @@ export function Game() {
         setDiceRoll(true)
         setTimeout(() => {
             setDiceRoll(false)
-        }, 1600);
+        }, 1400);
     }
 
     useEffect(() => handlePress(), [aposta, multiplicador,size]);
@@ -128,7 +128,7 @@ export function Game() {
                     color={'transparent'}
                 />
             </View>
-            <TouchableOpacity  onPress={toggleOptions}  style={{marginLeft:'auto', marginRight: 'auto',backgroundColor: '#360259',marginBottom: 40, alignItems: 'center', padding: 8,borderRadius: 10}}>
+            <TouchableOpacity  onPress={toggleOptions}  style={{ marginLeft:'auto', marginRight: 'auto',backgroundColor: '#360259',marginBottom: 40, alignItems: 'center', padding: 8,borderRadius: 10}}>
                 <Text style={{width: '80%', textAlign: 'center',fontSize: 24,color: '#fdfdfd',fontWeight: 'bold'}}>
                     SALDO: <Text style={{color: '#C291F2'}}>R${balance} <Text style={{color:'lightgray'}}>{arrowSaldo}</Text></Text>
                 </Text>
@@ -139,7 +139,7 @@ export function Game() {
                             <Button
                                 style={{textAlign: 'center', fontWeight: 'bold'}}
                                 title='Depositar'
-                                onPress={() => setModalDep(true)}
+                                onPress={() => {setModalDep(true); toggleOptions()}}
                                 color={'purple'}
                             />
                         </View>
@@ -147,7 +147,7 @@ export function Game() {
                             <Button
                                 style={{textAlign: 'center', fontWeight: 'bold'}}
                                 title='Sacar'
-                                onPress={() => setModalSaq(true)}
+                                onPress={() => {setModalSaq(true); toggleOptions()}}
                                 color={'purple'}
                             />
                         </View>

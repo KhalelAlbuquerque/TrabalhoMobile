@@ -7,7 +7,7 @@ export function ModalDep({balance,setBalance,setModalDep}) {
 
     function handleClick () {
         setModalDep(false)
-        setBalance(balance + adcBalance)
+        setBalance(parseFloat(balance) + parseFloat(adcBalance))
     }
 
     return (

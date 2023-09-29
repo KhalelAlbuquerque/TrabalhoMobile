@@ -6,9 +6,20 @@ export function ModalSaq({ balance, setBalance, setModalSaq }) {
     const [removeBalance, setRemoveBalance] = useState(0)
 
     function handleClick() {
-        setModalSaq(false)
+        if(removeBalance.includes(',')){
+            alert("Digite um número sem virgulas pra saque")
+            return
+        }
         const novoValor = parseFloat(removeBalance)
-        setBalance(balance - novoValor)
+        if((parseFloat(balance) - parseFloat(novoValor)<0)){
+            alert("Saldo insuficiente pra saque")
+            return
+        }else if(isNaN(novoValor)){
+            alert("Digite um valor válido pra saque")
+        }
+        setModalSaq(false)
+        setBalance(parseFloat(balance) - parseFloat(novoValor))
+        alert("Saque realizado!")
     }
 
     return (
@@ -26,7 +37,12 @@ export function ModalSaq({ balance, setBalance, setModalSaq }) {
                     style={styles.TextInput}
                     value={removeBalance.toString()}
                     placeholder="Digite um valor que queira sacar"
-                    onChangeText={(text) => setRemoveBalance(Number(text))}
+                    onChangeText={(text) => {
+                        if (text.charAt(0) === '0') {
+                            text = text.substring(1); // Remove o primeiro caractere
+                        }
+                        setRemoveBalance(text);
+                    }}
                     keyboardType="numeric"
                     placeholderTextColor="gray"
                     color="black"
