@@ -4,6 +4,7 @@ import Slider from '@react-native-community/slider';
 import { useNavigation } from '@react-navigation/native';
 import { ModalDep } from './components/ModalDep';
 import { ModalSaq } from './components/ModalSaq';
+import { ModalInfos }from './components/ModalInfos';
 
 export function Game() {
     const navigation = useNavigation()
@@ -20,6 +21,7 @@ export function Game() {
     const [diceRoll, setDiceRoll] = useState(false)
     const [modalDep,setModalDep] = useState(false)
     const [modalSaq,setModalSaq] = useState(false)
+    const [modalInfo, setModalInfo] = useState(false)
 
 
     function calculateMultiplicador(value) {
@@ -232,30 +234,23 @@ export function Game() {
                     </Text>
                 </View>
             </View>
+            
             <View>
-                <View style={styles.howToContainer}>
-                    <Text style={styles.howToTitle}>Como jogar</Text>
-                    <View style={styles.howToDescContainer}>
-                        <Text style={styles.howToDesc}>Coloque o valor que deseja apostar no campo "Valor da aposta."</Text>
-                        <Text style={styles.howToDesc}>Após isso, deslize a barra escolhendo o valor do dado que deseja apostar.</Text>
-                    </View>
-                </View>
-                <View style={[styles.howToContainer, styles.lastContainer]}>
-                    <Text style={styles.howToTitle}>Como funciona</Text>
-                    <View style={styles.howToDescContainer}>
-                        <Text style={styles.howToDesc}>
-                            Com o número do dado escolhido pra escolhido pra aposta
-                            clique em "Apostar", caso o número que caia seja abaixo
-                            do número escolhido você perde, caso contrário, você ganha!
-                        </Text>
-                    </View>
-                </View>
+                <Button
+                    title='COMO JOGAR'
+                    onPress={() => setModalInfo(true)}
+                    color={'transparent'}
+                />
             </View>
+
             <Modal visible={modalDep} animationType='fade' transparent={true}>
                 <ModalDep balance={balance} setBalance={setBalance} setModalDep={setModalDep}/>
             </Modal>
             <Modal visible={modalSaq} animationType='fade' transparent={true}>
                 <ModalSaq balance={balance} setBalance={setBalance} setModalSaq={setModalSaq}/>
+            </Modal>
+            <Modal visible={modalInfo} animationType='fade' transparent={true}>
+                <ModalInfos setModalInfo={setModalInfo}/>
             </Modal>
         </ScrollView>
     )
@@ -368,40 +363,6 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         width: '110%',
     },
-    howToContainer:{
-        width: 350,
-        height: 140,
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        backgroundColor: '#2C3673',
-        borderRadius: 10,
-        marginTop: 10
-    },
-    howToTitle:{        
-        color: '#3DADF2',
-        fontSize: 32,
-        fontWeight:'bold',            
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        marginBottom: 5,
-        marginTop: 5
-    },
-    howToDescContainer:{
-        width:'70%',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-    },
-    howToDesc:{
-        color: 'white',
-        width: '100%',
-        textAlign:'center',
-        marginBottom: 2,
-        fontSize: 14
-    },
-    lastContainer:{
-        marginBottom: 130,
-        height: 160
-    }
 });
 
 export default Game;
