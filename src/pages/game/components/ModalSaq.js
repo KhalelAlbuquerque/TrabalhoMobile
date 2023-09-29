@@ -39,7 +39,7 @@ export function ModalSaq({ balance, setBalance, setModalSaq }) {
                     placeholder="Digite um valor que queira sacar"
                     onChangeText={(text) => {
                         if (text.charAt(0) === '0') {
-                            text = text.substring(1); // Remove o primeiro caractere
+                            text = text.substring(1)
                         }
                         setRemoveBalance(text);
                     }}
