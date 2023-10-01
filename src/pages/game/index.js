@@ -222,6 +222,7 @@ export function Game() {
                         style={styles.inputAposta}
                         onChangeText={(text) => setAposta(text)}
                         keyboardType="numeric"
+                        onSubmitEditing={fazerAposta}
                     />
                 </View>
                 <Button style={{borderRadius: 15}} color={'green'} title="Apostar" onPress={fazerAposta} />
