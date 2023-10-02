@@ -210,7 +210,7 @@ export function Game() {
                 </View>
             </View>
 
-            <View style={{ width: '100%', backgroundColor: '#2C3673', paddingHorizontal: 20, paddingTop: 10, paddingBottom: 20 }}>
+            <View style={styles.apostaContainer}>
                 <View style={styles.apostaEntry}>
                     <Text style={[styles.textStyle2, {marginBottom: 7}]}>Valor da Aposta</Text>
                     <Text style={styles.textStyle2}> SALDO R$ {balance}</Text>
@@ -270,6 +270,17 @@ const styles = StyleSheet.create({
         width: 100,
         position: 'absolute'
         
+    },
+    apostaContainer:{
+        width: '100%', 
+        backgroundColor: '#2C3673', 
+        paddingHorizontal: 20, 
+        paddingTop: 10, 
+        paddingBottom: 20,
+        width: '90%',
+        marginLeft:'auto',
+        marginRight:'auto',
+        borderRadius: 10
     },
     apostaEntry: {
         flexDirection: 'row',
