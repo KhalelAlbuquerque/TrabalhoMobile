@@ -73,7 +73,7 @@ export function Home() {
 
 const styles = StyleSheet.create({
   containerAll:{
-    backgroundColor: '#BFACA4'
+    backgroundColor: '#FFFFFF'
   },
   logoTitle:{
     marginTop: 80,
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
     height: 350,
     textAlign:'center',
-    backgroundColor: '#BFACA4'
+    backgroundColor: '#FFFFFF'
   },
   imagemHome: {
     maxHeight: 200,
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#BFACA4'
+    backgroundColor: '#FFFFFF'
   },
   swiperDot: {
     backgroundColor: 'gray', 
