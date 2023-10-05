@@ -28,7 +28,7 @@ export function Home() {
               style={styles.imagemHome}
               source={require('../../public/img/dados.png')}
             />
-            <View>
+            <View style={styles.textinho}>
                 <Text>Se divirta de qualquer lugar</Text>
             </View>
           </View>
@@ -124,6 +124,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#FFFFFF'
+  },
+  textinho: {
+    color: '#3A3A3A,
+    fontFamily: 'Roboto',
+    fontSize: 20,
+    fontWeight: 500
   },
   swiperDot: {
     backgroundColor: 'gray', 

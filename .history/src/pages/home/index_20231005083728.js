@@ -58,7 +58,7 @@ export function Home() {
         <Button
             title='Jogue agora!'
             onPress={() => navigation.navigate('Game')}
-            color={'#BD0000'}
+            color={'red'}
         />
       </View>
 

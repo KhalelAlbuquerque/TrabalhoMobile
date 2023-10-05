@@ -58,7 +58,7 @@ export function Home() {
         <Button
             title='Jogue agora!'
             onPress={() => navigation.navigate('Game')}
-            color={'#BD0000'}
+            color={'red'}
         />
       </View>
 
@@ -95,8 +95,6 @@ const styles = StyleSheet.create({
   bestPlat:{
     textAlign:'center',
     fontSize: 20,
-    fontFamily: 'Roboto',
-    fontWeight: '500',
     color: '#BD0000'
   },
   containerInfo: {
@@ -143,7 +141,6 @@ const styles = StyleSheet.create({
     width: '80%',
     marginLeft: 'auto',
     marginRight: 'auto',
-    borderRadius: 5
   },
   footer:{
     marginTop: 30,

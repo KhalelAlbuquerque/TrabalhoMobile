@@ -28,7 +28,8 @@ export function Home() {
               style={styles.imagemHome}
               source={require('../../public/img/dados.png')}
             />
-            <View>
+            /* mexi aqui, ramon */
+            <View style={styles.textinho}>
                 <Text>Se divirta de qualquer lugar</Text>
             </View>
           </View>
