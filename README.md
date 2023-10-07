@@ -25,9 +25,9 @@
 ### Pré requisitos:
 
 Antes de iniciar o projeto, você vai ter de instalar as seguintes ferramentas:
-[VS Code](https://code.visualstudio.com/download)
-[Expo (Android)](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=pt_BR&gl=US)
-[Expo Go (IOS)](https://apps.apple.com/br/app/expo-go/id982107779)
+* [VS Code](https://code.visualstudio.com/download)
+* [Expo (Android)](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=pt_BR&gl=US)
+* [Expo Go (IOS)](https://apps.apple.com/br/app/expo-go/id982107779)
 
 
 ### 🎲 Rodando o aplicativo
