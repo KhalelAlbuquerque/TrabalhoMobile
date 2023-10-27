@@ -123,49 +123,51 @@ export function Game() {
 
     return (
         <ScrollView style={styles.containerAll}>
-            <View style={styles.voltar}>
-                <Button
-                    title='Voltar'
-                    onPress={() => navigation.navigate('Home')}
-                    color={'transparent'}
-                />
-            </View>
-            <TouchableOpacity  onPress={toggleOptions}  style={{ marginLeft:'auto', marginRight: 'auto',backgroundColor: '#360259',marginBottom: 40, alignItems: 'center', padding: 8,borderRadius: 10}}>
-                <Text style={{width: '80%', textAlign: 'center',fontSize: 24,color: '#fdfdfd',fontWeight: 'bold'}}>
-                    SALDO: <Text style={{color: '#C291F2'}}>R${balance} <Text style={{color:'lightgray'}}>{arrowSaldo}</Text></Text>
-                </Text>
-                
-                {mostrarOpcoes && (
-                    <View>
-                        <View style={{marginBottom: 5}}>
-                            <Button
-                                style={{textAlign: 'center', fontWeight: 'bold'}}
-                                title='Depositar'
-                                onPress={() => {setModalDep(true); toggleOptions()}}
-                                color={'purple'}
-                            />
-                        </View>
+            <View style={{backgroundColor:'#EDC9C9', paddingTop:65, marginBottom:30}}>
+                <View style={styles.voltar}>
+                    <Button
+                        title='Voltar'
+                        onPress={() => navigation.navigate('Home')}
+                        color={'transparent'}
+                    />
+                </View>
+                <TouchableOpacity  onPress={toggleOptions}  style={{ marginLeft:'auto', marginRight: 'auto',backgroundColor: '#DCD0D1',marginBottom: 40, alignItems: 'center', padding: 8,borderRadius: 10}}>
+                    <Text style={{width: '80%', textAlign: 'center',fontSize: 24,color: '#fdfdfd',fontWeight: 'bold'}}>
+                        SALDO: <Text style={{color: '#525252'}}>R${balance} <Text style={{color:'lightgray'}}>{arrowSaldo}</Text></Text>
+                    </Text>
+                    
+                    {mostrarOpcoes && (
                         <View>
-                            <Button
-                                style={{textAlign: 'center', fontWeight: 'bold'}}
-                                title='Sacar'
-                                onPress={() => {setModalSaq(true); toggleOptions()}}
-                                color={'purple'}
-                            />
+                            <View style={{marginBottom: 5}}>
+                                <Button
+                                    style={{textAlign: 'center', fontWeight: 'bold'}}
+                                    title='Depositar'
+                                    onPress={() => {setModalDep(true); toggleOptions()}}
+                                    color={'purple'}
+                                />
+                            </View>
+                            <View>
+                                <Button
+                                    style={{textAlign: 'center', fontWeight: 'bold'}}
+                                    title='Sacar'
+                                    onPress={() => {setModalSaq(true); toggleOptions()}}
+                                    color={'purple'}
+                                />
+                            </View>
                         </View>
-                    </View>
-                )}
-            </TouchableOpacity>
-
-            <View style={styles.container}>
+                    )}
+                </TouchableOpacity>
 
                 {diceRoll
                     ? (
-                    <Image style={{marginLeft:'auto', marginRight:'auto'}} source={require('../../public/img/dadoGif.gif')}/>
+                    <Image style={{marginLeft:'auto', marginRight:'auto', width: 100, height:100}} source={require('../../public/img/dadoGif.gif')}/>
                     ) : (        
-                    <Image style={{marginLeft:'auto', marginRight:'auto'}} source={require('../../public/img/frame-01.gif')}/>
+                    <Image style={{marginLeft:'auto', marginRight:'auto', width: 100, height:100}} source={require('../../public/img/frame-01.gif')}/>
                     )
                 }
+            </View>
+
+            <View style={styles.container}>
 
                 <View style={styles.range}>
                     <View style={styles.valueContainer}><Text style={[styles.valueText, styles.textStyle2]}>0</Text></View>
@@ -190,8 +192,10 @@ export function Game() {
             </View>
             <View style={[styles.containerFunctions]}>
                 <View styles={[styles.operations]}>
-                    <Text style={[styles.textStyle2,{marginBottom: 5}]} aria-label="Label for Username" nativeID="labelUsername">Multiplicador</Text>
-                    <Text style={styles.operadores}>{multiplicador}</Text>
+                <Text style={[styles.textStyle2,{marginBottom: 5}]} aria-label="Label for Username" nativeID="labelUsername">Multiplicador</Text>
+                    <Text style={styles.operadores}>
+                        {multiplicador}
+                    </Text>
                 </View>
                 <View styles={[styles.operations]}>
                     <Text style={[styles.textStyle2,{marginBottom: 5}]} aria-label="Label for Username" nativeID="labelUsername">Rolar Acima</Text>
@@ -205,8 +209,10 @@ export function Game() {
                         />
                 </View>
                 <View styles={[styles.operations]}>
-                    <Text style={[styles.textStyle2,{marginBottom: 5}]} aria-label="Label for Username" nativeID="labelUsername">Chance de vitória</Text>
-                    <Text style={styles.operadores}>{win}</Text>
+                <Text style={[styles.textStyle2,{marginBottom: 5}]} aria-label="Label for Username" nativeID="labelUsername">Chance de vitória</Text>
+                    <Text style={styles.operadores}>
+                        {win}
+                    </Text>
                 </View>
             </View>
 
@@ -230,18 +236,27 @@ export function Game() {
                     <Text style={[styles.apostaEntry,styles.textStyle2,{marginTop: 7,marginBottom: 7}]}>
                         Lucro na vitória
                     </Text>
-                    <Text style={[{backgroundColor: '#360259', padding: 10, borderRadius: 5, color: 'white',fontWeight: 'bold'}]}>
+                    <Text style={[{backgroundColor: 'white', padding: 10, borderRadius: 5, color: '#525252',fontWeight: 'bold'}]}>
                         {lucro ? `R$ ${lucro}` : '0.00'}
                     </Text>
                 </View>
             </View>
             
-            <View>
-                <Button
-                    title='COMO JOGAR'
-                    onPress={() => setModalInfo(true)}
-                    color={'transparent'}
-                />
+            <View style={styles.infosOrganizer}>
+                <View style={{backgroundColor: 'gray', color:"#525252",  fontSize: '3rem', width: "45%", marginTop: 10, borderRadius: 10}}>
+                    <Button
+                        title='COMO JOGAR?'
+                        onPress={() => setModalInfo(true)}
+                        color={'white'}
+                    />
+                </View>
+                <View style={{backgroundColor: 'gray', color:"#525252",  fontSize: '3rem', width: "45%", marginTop: 10, borderRadius: 10}}>
+                    <Button
+                        title='COMO FUNCIONA?'
+                        onPress={() => setModalInfo(true)}
+                        color={'white'}
+                    />
+                </View>
             </View>
 
             <Modal visible={modalDep} animationType='fade' transparent={true}>
@@ -264,7 +279,7 @@ const styles = StyleSheet.create({
     textStyle2: {
         fontSize: 15,
         fontWeight: 'bold',
-        color: '#3DADF2'
+        color: '#525252'
     },
     voltar:{
         width: 100,
@@ -273,7 +288,7 @@ const styles = StyleSheet.create({
     },
     apostaContainer:{
         width: '100%', 
-        backgroundColor: '#2C3673', 
+        backgroundColor: '#ddd', 
         paddingHorizontal: 20, 
         paddingTop: 10, 
         paddingBottom: 20,
@@ -296,12 +311,12 @@ const styles = StyleSheet.create({
     },
     inputAposta: {
         borderRadius: 5,
-        width: '70%',
-        backgroundColor: '#360259',
+        width: '100%',
+        backgroundColor: 'white',
         height: 40,
         paddingHorizontal: 10,
         marginBottom: 20,
-        color: 'white',
+        color: '#525252',
         fontWeight: 'bold',
     },
     Aposta: {
@@ -313,7 +328,7 @@ const styles = StyleSheet.create({
     },
     operadores: {
         padding: 10,
-        backgroundColor: '#360259',
+        backgroundColor: '#DCD0D1',
         color: '#fff',
         borderRadius: 3,
         height: 40,
@@ -324,12 +339,15 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         alignItems: 'center',
+        backgroundColor: '#ddd',
+        height: 100,
+        display: 'flex',
+        flexDirection: 'column'
     },
     containerAll: {
         display: 'flex',
         flexDirection: 'column',
-        paddingTop: 65,
-        backgroundColor: '#270140',
+        backgroundColor: 'white',
         height: '100%',
     },
     slider: {
@@ -341,8 +359,10 @@ const styles = StyleSheet.create({
     },
     spin: {
         height: 50,
-        backgroundColor: '#fdfd',
+        backgroundColor: '#ddd',
         borderRadius: 40,
+        marginTop: -20,
+        marginBottom: 20
     },
     container: {
         flex: 1,
@@ -366,7 +386,6 @@ const styles = StyleSheet.create({
         minHeight: 100,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        backgroundColor: '#2C3673',
         marginHorizontal: 20,
         padding: 15,
     },
@@ -375,6 +394,13 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         width: '110%',
     },
+    infosOrganizer:{
+        width:'100%',
+        display:'flex',
+        justifyContent:'center',
+        flexDirection:'row',
+        gap: 10
+    }
 });
 
 export default Game;

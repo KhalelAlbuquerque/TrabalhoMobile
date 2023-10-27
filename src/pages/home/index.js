@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     width: '65%',
   },
   carrossel: {
-    height: "500px", 
+    height: "500px" , 
   },
   blocoCarrossel: {
     flex: 1,

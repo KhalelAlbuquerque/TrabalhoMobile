@@ -38,10 +38,11 @@ export function ModalDep({balance,setBalance,setModalDep}) {
                 <Text style={styles.title}>
                     Depositar
                 </Text>
+                <View></View>
                 <TextInput
                     style={styles.TextInput}
                     value={adcBalance.toString()}
-                    placeholder="Digite um valor que queira depositar"
+                    placeholder="Digite o valor do depósito"
                     onChangeText={(text) => {
                         if (text.charAt(0) === '0') {
                             text = text.substring(1)
@@ -52,11 +53,11 @@ export function ModalDep({balance,setBalance,setModalDep}) {
                     placeholderTextColor="gray"
                     onSubmitEditing={handleClick}
                 />
-                <View>
+                <View style={styles.buttonContainer}>
                     <Button
-                        title='Depositar'
+                        title='Confirmar depósito'
                         onPress={handleClick}
-                        color={'red'}
+                        color={'white'}
                     />
                 </View>
             </View>
@@ -87,11 +88,17 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     TextInput: {
+        color:'#222',
+        fontWeight:'bold',
         padding: 10,
-        width: "70%",
+        width: "80%",
         borderWidth: 1,
         borderRadius: 8,
-        marginBottom: 10,
+        marginBottom: 30,
+        backgroundColor:'#ddd',
+        borderColor:'transparent',
+        height:60,
+        fontSize:16
     },
     closeButtonContainer: {
         position: 'absolute',
@@ -101,5 +108,14 @@ const styles = StyleSheet.create({
     closeButton: {
         fontSize: 24,
         fontWeight: 'bold'
+    },
+    buttonContainer:{
+        backgroundColor: '#BD0000',
+        width:"80%",
+        borderRadius: 10,
+        height: 50,
+        display:'flex',
+        alignItems:'center',
+        justifyContent:'center'
     }
 })
