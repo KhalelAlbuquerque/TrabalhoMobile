@@ -133,7 +133,7 @@ export function Game() {
                 </View>
                 <TouchableOpacity  onPress={toggleOptions}  style={{ marginLeft:'auto', marginRight: 'auto',backgroundColor: '#DCD0D1',marginBottom: 20, alignItems: 'center', padding: 8,borderRadius: 10}}>
                     <Text style={{width: '80%', textAlign: 'center',fontSize: 24,color: '#fdfdfd',fontWeight: 'bold'}}>
-                        SALDO: <Text style={{color: '#525252'}}>R${balance} <Text style={{color:'lightgray'}}>{arrowSaldo}</Text></Text>
+                        SALDO: <Text style={{color: '#525252'}}>R${balance} <Text style={{color:'red'}}>{arrowSaldo}</Text></Text>
                     </Text>
                     
                     {mostrarOpcoes && (
@@ -143,7 +143,7 @@ export function Game() {
                                     style={{textAlign: 'center', fontWeight: 'bold'}}
                                     title='Depositar'
                                     onPress={() => {setModalDep(true); toggleOptions()}}
-                                    color={'purple'}
+                                    color={'white'}
                                 />
                             </View>
                             <View>
@@ -151,7 +151,7 @@ export function Game() {
                                     style={{textAlign: 'center', fontWeight: 'bold'}}
                                     title='Sacar'
                                     onPress={() => {setModalSaq(true); toggleOptions()}}
-                                    color={'purple'}
+                                    color={'white'}
                                 />
                             </View>
                         </View>
@@ -196,26 +196,26 @@ export function Game() {
                 </View>
             </View>
             <View style={[styles.containerFunctions]}>
-                <View styles={[styles.operations]}>
-                <Text style={[styles.textStyle2,{marginBottom: 5}]} aria-label="Label for Username" nativeID="labelUsername">Multiplicador</Text>
-                    <Text style={styles.operadores}>
+                <View style={[styles.operations]}>
+                <Text style={[styles.textStyle2,{marginBottom: 5, fontSize: 12}]} aria-label="Label for Username" nativeID="labelUsername">Multiplicador</Text>
+                    <Text style={[styles.operadores, {fontSize:30}]}>
                         {multiplicador}
                     </Text>
                 </View>
-                <View styles={[styles.operations]}>
-                    <Text style={[styles.textStyle2,{marginBottom: 5}]} aria-label="Label for Username" nativeID="labelUsername">Rolar Acima</Text>
+                <View style={[styles.operations]}>
+                    <Text style={[styles.textStyle2,{marginBottom: 5, fontSize: 12}]} aria-label="Label for Username" nativeID="labelUsername">Rolar Acima</Text>
                     <TextInput
                         value={valorTextInput}
                         placeholder={size.toString()}
-                        style={styles.operadores}
                         onChangeText={handleTextInputChange}
+                        style={[styles.operadores, {fontSize:30}]}
                         keyboardType="numeric"
                         placeholderTextColor="#fff"
                         />
                 </View>
-                <View styles={[styles.operations]}>
-                    <Text style={[styles.textStyle2,{marginBottom: 5}]} aria-label="Label for Username" nativeID="labelUsername">Chance de vitória</Text>
-                    <Text style={styles.operadores}>
+                <View style={[styles.operations]}>
+                    <Text style={[styles.textStyle2,{marginBottom: 5, fontSize: 12}]} aria-label="Label for Username" nativeID="labelUsername">Chance de vitória</Text>
+                    <Text style={[styles.operadores, {fontSize:30}]}>
                         {win}
                     </Text>
                 </View>
@@ -237,7 +237,9 @@ export function Game() {
                         placeholderTextColor={'black'}
                     />
                 </View>
-                <Button style={{borderRadius: 15}} color={'green'} title="Apostar" onPress={fazerAposta} />
+                <View style={styles.buttonContainer}>
+                    <Button style={{borderRadius: 15}} color={'white'} title="Apostar" onPress={fazerAposta} />
+                </View>
                 <View style={{ width: '100%'}}>
                     <Text style={[styles.apostaEntry,styles.textStyle2,{marginTop: 7,marginBottom: 7}]}>
                         Lucro na vitória
@@ -331,22 +333,24 @@ const styles = StyleSheet.create({
         backgroundColor: '#fdfd',
     },
     operadores: {
-        padding: 10,
         backgroundColor: '#DCD0D1',
-        color: '#fff',
+        color: 'black',
         borderRadius: 3,
         height: 40,
         textAlign: 'center',
         fontWeight: 'bold',
     },
     operations: {
-        flex: 1,
+        width:'30%',
         flexDirection: 'column',
         alignItems: 'center',
         backgroundColor: '#DCD0D1',
         height: 100,
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        alignItems:'center',
+        justifyContent:'center',
+        gap: 5
     },
     containerAll: {
         display: 'flex',
@@ -390,8 +394,8 @@ const styles = StyleSheet.create({
         minHeight: 100,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginHorizontal: 20,
-        padding: 15,
+        marginLeft: 'auto',
+        marginRight:'auto'
     },
     containerAposta: {
         flex: 1,
@@ -404,6 +408,16 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         flexDirection:'row',
         gap: 10
+    },
+    buttonContainer:{
+        width: '100%',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        height:50,
+        display:'flex',
+        justifyContent:'center',
+        borderRadius: 5,
+        backgroundColor:'#BD0000'
     }
 });
 
