@@ -58,7 +58,7 @@ export function Home() {
         <Button
             title='Jogue agora!'
             onPress={() => navigation.navigate('Game')}
-            color={'#BD0000'}
+            color={'white'}
         />
       </View>
 
@@ -143,7 +143,8 @@ const styles = StyleSheet.create({
     width: '80%',
     marginLeft: 'auto',
     marginRight: 'auto',
-    borderRadius: 5
+    borderRadius: 5,
+    backgroundColor:'#BD0000'
   },
   footer:{
     marginTop: 30,

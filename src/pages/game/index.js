@@ -131,7 +131,7 @@ export function Game() {
                         color={'transparent'}
                     />
                 </View>
-                <TouchableOpacity  onPress={toggleOptions}  style={{ marginLeft:'auto', marginRight: 'auto',backgroundColor: '#DCD0D1',marginBottom: 40, alignItems: 'center', padding: 8,borderRadius: 10}}>
+                <TouchableOpacity  onPress={toggleOptions}  style={{ marginLeft:'auto', marginRight: 'auto',backgroundColor: '#DCD0D1',marginBottom: 20, alignItems: 'center', padding: 8,borderRadius: 10}}>
                     <Text style={{width: '80%', textAlign: 'center',fontSize: 24,color: '#fdfdfd',fontWeight: 'bold'}}>
                         SALDO: <Text style={{color: '#525252'}}>R${balance} <Text style={{color:'lightgray'}}>{arrowSaldo}</Text></Text>
                     </Text>
@@ -160,9 +160,9 @@ export function Game() {
 
                 {diceRoll
                     ? (
-                    <Image style={{marginLeft:'auto', marginRight:'auto', width: 100, height:100}} source={require('../../public/img/dadoGif.gif')}/>
+                    <Image style={{marginLeft:'auto', marginRight:'auto', width: 100, height:100, marginBottom: 20}} source={require('../../public/img/dadoGif.gif')}/>
                     ) : (        
-                    <Image style={{marginLeft:'auto', marginRight:'auto', width: 100, height:100}} source={require('../../public/img/frame-01.gif')}/>
+                    <Image style={{marginLeft:'auto', marginRight:'auto', width: 100, height:100, marginBottom: 20}} source={require('../../public/img/frame-01.gif')}/>
                     )
                 }
             </View>
@@ -186,7 +186,12 @@ export function Game() {
                         minimumTrackTintColor='red'
                         thumbTintColor='white'
                         value={size}
-                        onValueChange={handleChange}
+                        onValueChange={value=>{
+                            clearTimeout(this.sliderTimeoutId)
+                            this.sliderTimeoutId = setTimeout(()=>{
+                                handleChange(value)
+                            },10)
+                        }}
                     />
                 </View>
             </View>
@@ -209,7 +214,7 @@ export function Game() {
                         />
                 </View>
                 <View styles={[styles.operations]}>
-                <Text style={[styles.textStyle2,{marginBottom: 5}]} aria-label="Label for Username" nativeID="labelUsername">Chance de vitória</Text>
+                    <Text style={[styles.textStyle2,{marginBottom: 5}]} aria-label="Label for Username" nativeID="labelUsername">Chance de vitória</Text>
                     <Text style={styles.operadores}>
                         {win}
                     </Text>
@@ -229,6 +234,7 @@ export function Game() {
                         onChangeText={(text) => setAposta(text)}
                         keyboardType="numeric"
                         onSubmitEditing={fazerAposta}
+                        placeholderTextColor={'black'}
                     />
                 </View>
                 <Button style={{borderRadius: 15}} color={'green'} title="Apostar" onPress={fazerAposta} />
@@ -279,7 +285,6 @@ const styles = StyleSheet.create({
     textStyle2: {
         fontSize: 15,
         fontWeight: 'bold',
-        color: '#525252'
     },
     voltar:{
         width: 100,
@@ -288,7 +293,7 @@ const styles = StyleSheet.create({
     },
     apostaContainer:{
         width: '100%', 
-        backgroundColor: '#ddd', 
+        backgroundColor: '#DCD0D1', 
         paddingHorizontal: 20, 
         paddingTop: 10, 
         paddingBottom: 20,
@@ -316,8 +321,7 @@ const styles = StyleSheet.create({
         height: 40,
         paddingHorizontal: 10,
         marginBottom: 20,
-        color: '#525252',
-        fontWeight: 'bold',
+        color: '#525252'
     },
     Aposta: {
         flexDirection: 'column',
@@ -339,7 +343,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         alignItems: 'center',
-        backgroundColor: '#ddd',
+        backgroundColor: '#DCD0D1',
         height: 100,
         display: 'flex',
         flexDirection: 'column'
@@ -359,7 +363,7 @@ const styles = StyleSheet.create({
     },
     spin: {
         height: 50,
-        backgroundColor: '#ddd',
+        backgroundColor: '#DCD0D1',
         borderRadius: 40,
         marginTop: -20,
         marginBottom: 20
