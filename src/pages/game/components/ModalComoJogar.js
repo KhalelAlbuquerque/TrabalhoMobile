@@ -1,5 +1,7 @@
+import Slider from '@react-native-community/slider';
 import React  from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { TextInput } from 'react-native-web';
 
 export function ModalComoJogar({setModalComoJogar}){
     return(
@@ -10,11 +12,31 @@ export function ModalComoJogar({setModalComoJogar}){
                         <Text style={styles.closeButton}>X</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={styles.howToContainer}>
-                    <Text style={styles.howToTitle}>Como jogar</Text>
-                    <View style={styles.howToDescContainer}>
-                        <Text style={styles.howToDesc}>Coloque o valor que deseja apostar no campo "Valor da aposta."</Text>
-                        <Text style={styles.howToDesc}>Após isso, deslize a barra escolhendo o valor do dado que deseja apostar.</Text>
+            
+                <Text style={styles.howToTitle}>Como jogar</Text>
+                <View style={styles.howToDescContainer}>
+                    <View style={{textAlign:'center', marginBottom:20, marginTop:20}}>
+                        <Text style={{ fontSize: '16rem'}}>Coloque o valor que deseja apostar no campo de "Faça sua aposta".</Text>
+                        <View style={{marginTop: 10, width: '100%'}}>
+                            <Text style={{fontSize:'16rem', fontWeight: 'bold'}}>Faça sua aposta:</Text>
+                            <View style={{backgroundColor:'white', width:'100%', padding: 10, boxSizing: 'borderbox', borderRadius:5}}>
+                                <Text>Digite o valor da aposta...</Text>
+                            </View>
+                        </View>
+                    </View>
+
+                    <View style={{marginTop:20}}>
+                        <Text style={{ fontSize: '16rem'}}>Após isso, deslize a barra escolhendo o valor do dado que deseja apostar.</Text>
+                        <View>
+                            <Slider 
+                                minimumValue={1}
+                                maximumValue={100}
+                                step={0}
+                                maximumTrackTintColor='green'
+                                minimumTrackTintColor='red'
+                                value={50}
+                            />
+                        </View>
                     </View>
                 </View>
             </View>
@@ -48,20 +70,11 @@ const styles = StyleSheet.create({
         marginRight:'auto',
         marginTop:'auto',
         marginBottom:'auto',
-        backgroundColor: 'white',
+        backgroundColor: '#D9D9D9',
         borderRadius:10,
     },
-    howToContainer:{
-        width: 350,
-        height: 140,
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        backgroundColor: '#2C3673',
-        borderRadius: 10,
-        marginTop: 10
-    },
     howToTitle:{        
-        color: '#3DADF2',
+        color: 'black',
         fontSize: 32,
         fontWeight:'bold',            
         marginLeft: 'auto',
@@ -70,7 +83,7 @@ const styles = StyleSheet.create({
         marginTop: 5
     },
     howToDescContainer:{
-        width:'70%',
+        width:'80%',
         marginLeft: 'auto',
         marginRight: 'auto',
     },
