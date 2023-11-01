@@ -4,7 +4,8 @@ import Slider from '@react-native-community/slider';
 import { useNavigation } from '@react-navigation/native';
 import { ModalDep } from './components/ModalDep';
 import { ModalSaq } from './components/ModalSaq';
-import { ModalInfos }from './components/ModalInfos';
+import { ModalComoFunciona }from './components/ModalComoFunciona';
+import { ModalComoJogar }from './components/ModalComoJogar';
 
 export function Game() {
     const navigation = useNavigation()
@@ -21,7 +22,8 @@ export function Game() {
     const [diceRoll, setDiceRoll] = useState(false)
     const [modalDep,setModalDep] = useState(false)
     const [modalSaq,setModalSaq] = useState(false)
-    const [modalInfo, setModalInfo] = useState(false)
+    const [modalComoJogar, setModalComoJogar] = useState(false)
+    const [modalComoFunciona, setModalComoFunciona] = useState(false)
 
 
     function calculateMultiplicador(value) {
@@ -254,14 +256,14 @@ export function Game() {
                 <View style={{backgroundColor: 'gray', color:"#525252",  fontSize: '3rem', width: "45%", marginTop: 10, borderRadius: 10}}>
                     <Button
                         title='COMO JOGAR?'
-                        onPress={() => setModalInfo(true)}
+                        onPress={() => setModalComoJogar(true)}
                         color={'white'}
                     />
                 </View>
                 <View style={{backgroundColor: 'gray', color:"#525252",  fontSize: '3rem', width: "45%", marginTop: 10, borderRadius: 10}}>
                     <Button
                         title='COMO FUNCIONA?'
-                        onPress={() => setModalInfo(true)}
+                        onPress={() => setModalComoFunciona(true)}
                         color={'white'}
                     />
                 </View>
@@ -273,8 +275,11 @@ export function Game() {
             <Modal visible={modalSaq} animationType='fade' transparent={true}>
                 <ModalSaq balance={balance} setBalance={setBalance} setModalSaq={setModalSaq}/>
             </Modal>
-            <Modal visible={modalInfo} animationType='fade' transparent={true}>
-                <ModalInfos setModalInfo={setModalInfo}/>
+            <Modal visible={modalComoJogar} animationType='fade' transparent={true}>
+                <ModalComoJogar setModalComoJogar={setModalComoJogar}/>
+            </Modal>
+            <Modal visible={modalComoFunciona} animationType='fade' transparent={true}>
+                <ModalComoFunciona setModalComoFunciona={setModalComoFunciona}/>
             </Modal>
         </ScrollView>
     )

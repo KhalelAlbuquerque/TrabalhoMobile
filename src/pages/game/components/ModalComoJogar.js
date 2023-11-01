@@ -1,12 +1,12 @@
 import React  from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-export function ModalInfos({setModalInfo}){
+export function ModalComoJogar({setModalComoJogar}){
     return(
         <View style={styles.blurBG}>
             <View style={styles.infosContainer}>
                 <View>
-                    <TouchableOpacity onPress={() => setModalInfo(false)} >
+                    <TouchableOpacity onPress={() => setModalComoJogar(false)} >
                         <Text style={styles.closeButton}>X</Text>
                     </TouchableOpacity>
                 </View>
@@ -15,16 +15,6 @@ export function ModalInfos({setModalInfo}){
                     <View style={styles.howToDescContainer}>
                         <Text style={styles.howToDesc}>Coloque o valor que deseja apostar no campo "Valor da aposta."</Text>
                         <Text style={styles.howToDesc}>Após isso, deslize a barra escolhendo o valor do dado que deseja apostar.</Text>
-                    </View>
-                </View>
-                <View style={[styles.howToContainer, styles.lastContainer]}>
-                    <Text style={styles.howToTitle}>Como funciona</Text>
-                    <View style={styles.howToDescContainer}>
-                        <Text style={styles.howToDesc}>
-                            Com o número do dado escolhido pra escolhido pra aposta
-                            clique em "Apostar", caso o número que caia seja abaixo
-                            do número escolhido você perde, caso contrário, você ganha!
-                        </Text>
                     </View>
                 </View>
             </View>
