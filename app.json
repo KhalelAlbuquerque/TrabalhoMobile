@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "MobileJosue",
-    "slug": "MobileJosue",
+    "name": "TrabalhoMobile",
+    "slug": "TrabalhoMobile",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"

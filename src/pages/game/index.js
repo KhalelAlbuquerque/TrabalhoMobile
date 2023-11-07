@@ -126,45 +126,47 @@ export function Game() {
     return (
         <ScrollView style={styles.containerAll}>
             <View style={{backgroundColor:'#EDC9C9', paddingTop:65, marginBottom:30}}>
-                <View style={styles.voltar}>
-                    <Button
-                        title='Voltar'
-                        onPress={() => navigation.navigate('Home')}
-                        color={'transparent'}
-                    />
-                </View>
-                <TouchableOpacity  onPress={toggleOptions}  style={{ marginLeft:'auto', marginRight: 'auto',backgroundColor: '#DCD0D1',marginBottom: 20, alignItems: 'center', padding: 8,borderRadius: 10}}>
-                    <Text style={{width: '80%', textAlign: 'center',fontSize: 24,color: '#fdfdfd',fontWeight: 'bold'}}>
-                        SALDO: <Text style={{color: '#525252'}}>R${balance} <Text style={{color:'red'}}>{arrowSaldo}</Text></Text>
-                    </Text>
-                    
-                    {mostrarOpcoes && (
-                        <View>
-                            <View style={{marginBottom: 5}}>
-                                <Button
-                                    style={{textAlign: 'center', fontWeight: 'bold'}}
-                                    title='Depositar'
-                                    onPress={() => {setModalDep(true); toggleOptions()}}
-                                    color={'white'}
-                                />
-                            </View>
+                <View style={styles.containerHeader}>
+                    <View style={styles.voltar}>
+                        <Button
+                            title='Voltar'
+                            onPress={() => navigation.navigate('Home')}
+                            color={'white'}
+                        />
+                    </View>
+                    <TouchableOpacity  onPress={toggleOptions}  style={{ marginLeft:'auto', marginRight: 'auto',backgroundColor: '#DCD0D1',marginBottom: 20, alignItems: 'center', padding: 8,borderRadius: 10}}>
+                        <Text style={{width: '80%', textAlign: 'center',fontSize: 24,color: '#fdfdfd',fontWeight: 'bold'}}>
+                            SALDO: <Text style={{color: '#525252'}}>R${balance} <Text style={{color:'red'}}>{arrowSaldo}</Text></Text>
+                        </Text>
+                        
+                        {mostrarOpcoes && (
                             <View>
-                                <Button
-                                    style={{textAlign: 'center', fontWeight: 'bold'}}
-                                    title='Sacar'
-                                    onPress={() => {setModalSaq(true); toggleOptions()}}
-                                    color={'white'}
-                                />
+                                <View style={{marginBottom: 5}}>
+                                    <Button
+                                        style={{textAlign: 'center', fontWeight: 'bold'}}
+                                        title='Depositar'
+                                        onPress={() => {setModalDep(true); toggleOptions()}}
+                                        color={'white'}
+                                    />
+                                </View>
+                                <View>
+                                    <Button
+                                        style={{textAlign: 'center', fontWeight: 'bold'}}
+                                        title='Sacar'
+                                        onPress={() => {setModalSaq(true); toggleOptions()}}
+                                        color={'white'}
+                                    />
+                                </View>
                             </View>
-                        </View>
-                    )}
-                </TouchableOpacity>
+                        )}
+                    </TouchableOpacity>
+                </View>
 
                 {diceRoll
                     ? (
-                    <Image style={{marginLeft:'auto', marginRight:'auto', width: 100, height:100, marginBottom: 20}} source={require('../../public/img/dadoGif.gif')}/>
+                    <Image style={{marginLeft:'auto', marginRight:'auto', width: 100, height:100, marginTop: 70, marginBottom: 20}} source={require('../../public/img/dadoGif.gif')}/>
                     ) : (        
-                    <Image style={{marginLeft:'auto', marginRight:'auto', width: 100, height:100, marginBottom: 20}} source={require('../../public/img/frame-01.gif')}/>
+                    <Image style={{marginLeft:'auto', marginRight:'auto', width: 100, height:100, marginTop: 70,marginBottom: 20}} source={require('../../public/img/frame-01.gif')}/>
                     )
                 }
             </View>
@@ -294,9 +296,20 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     voltar:{
-        width: 100,
-        position: 'absolute'
-        
+        width: 80,
+        position: 'absolute',
+        backgroundColor: '#BD0000',
+        borderRadius: 10,
+        left: 5
+    },
+    containerHeader:{
+        position: 'absolute',
+        top: 70, 
+        left: 0, 
+        right: 0, 
+        marginLeft: 'auto', 
+        marginRight:'auto', 
+        zIndex: 99
     },
     apostaContainer:{
         width: '100%', 
@@ -382,7 +395,7 @@ const styles = StyleSheet.create({
         width: '90%',
         margin: 'auto',
         marginHorizontal: 20,
-        marginBottom: 10
+        marginBottom: 10,
     },
     range: {
         flex: 1,
