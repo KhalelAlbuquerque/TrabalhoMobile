@@ -19,7 +19,6 @@ export function Home() {
         <Swiper
           loop={true}
           showsPagination={true}
-          style={styles.carrossel}
           dotStyle={styles.swiperDot} 
           activeDotStyle={styles.swiperActiveDot} 
         >
@@ -95,7 +94,6 @@ const styles = StyleSheet.create({
   bestPlat:{
     textAlign:'center',
     fontSize: 20,
-    fontFamily: 'Roboto',
     fontWeight: '500',
     color: '#BD0000'
   },
@@ -115,9 +113,6 @@ const styles = StyleSheet.create({
   imagemHomeShield:{
     maxHeight: 200,
     width: '65%',
-  },
-  carrossel: {
-    height: "500px" , 
   },
   blocoCarrossel: {
     flex: 1,
