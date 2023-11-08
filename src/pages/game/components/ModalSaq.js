@@ -1,30 +1,47 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, Button, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Button, TouchableOpacity, Modal } from 'react-native';
+import { ModalMessage } from './ModalMessage';
 
 export function ModalSaq({ balance, setBalance, setModalSaq }) {
 
     const [removeBalance, setRemoveBalance] = useState('')
+    const [modalMessage, setModalMessage] = useState(false)
+    const [message, setMessage] = useState('')
+    const [type, setType] = useState('')
+
+    // setType('warning')
+    // setMessage("Saldo insuficiente")
+    // setModalMessage(true)
 
     function handleClick() {
         if(isNaN(removeBalance)){
-            alert("Digite um valor válido pra saque")
+            setType('warning')
+            setMessage("Digite um valor válido pra saque")
+            setModalMessage(true)
             return
         }
         if(removeBalance.includes(',')){
-            alert("Digite um número sem virgulas pra saque (use ponto)")
+            setType('warning')
+            setMessage("Digite um número sem virgulas pra saque (use ponto)")
+            setModalMessage(true)
             return
         }
         const novoValor = parseFloat(removeBalance).toFixed(2)
         if((parseFloat(balance) - parseFloat(novoValor)<0)){
-            alert("Saldo insuficiente pra saque")
+            setType('warning')
+            setMessage("Saldo insuficiente pra saque")
+            setModalMessage(true)
             return
         }else if(isNaN(novoValor) || novoValor == 0){
-            alert("Digite um valor válido pra saque")
+            setType('warning')
+            setMessage("Digite um valor válido pra saque")
+            setModalMessage(true)
             return
         }
-        setModalSaq(false)
+        setType('success')
+        setMessage("Saque realizado!")
+        setModalMessage(true)
         setBalance(parseFloat(balance) - parseFloat(novoValor))
-        alert("Saque realizado!")
     }
 
     return (
@@ -61,6 +78,9 @@ export function ModalSaq({ balance, setBalance, setModalSaq }) {
                     />
                 </View>
             </View>
+            <Modal visible={modalMessage} animationType='fade' transparent={true}>
+                <ModalMessage setModalMessage={setModalMessage} type={type} message={message} setModal={setModalSaq}/>
+            </Modal>
         </View>
     )
 }

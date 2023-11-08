@@ -1,30 +1,43 @@
-import { View, Text, TextInput, StyleSheet, Button, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Button, TouchableOpacity, Modal } from 'react-native';
+import { ModalMessage } from './ModalMessage';
 import React, { useState } from 'react';
 
 export function ModalDep({balance,setBalance,setModalDep}) {
 
     const [adcBalance, setAdcBalance] = useState('')
+    const [modalMessage, setModalMessage] = useState(false)
+    const [message, setMessage] = useState('')
+    const [type, setType] = useState('')
 
     function handleClick () {
         if(isNaN(adcBalance)){
-            alert("Digite um valor válido pra deposito")
+            setType('warning')
+            setMessage("Digite um valor válido pra deposito")
+            setModalMessage(true)
             return
         }
         if(adcBalance.includes(',')){
-            alert("Digite um número sem virgulas pra deposito (use ponto)")
+            setType('warning')
+            setMessage("Digite um número sem virgulas pra deposito (use ponto)")
+            setModalMessage(true)
             return
         }
         const novoValor = parseFloat(adcBalance).toFixed(2)
         if((parseFloat(balance) + parseFloat(novoValor)>1000)){
-            alert("Saldo maximo na plataforma: R$ 1000")
+            setType('warning')
+            setMessage("Saldo maximo na plataforma: R$ 1000")
+            setModalMessage(true)
             return
         }else if(isNaN(novoValor) || novoValor == 0){
-            alert("Digite um valor válido pra deposito")
+            setType('warning')
+            setMessage("Digite um valor válido pra deposito")
+            setModalMessage(true)
             return
         }
-        setModalDep(false)
         setBalance(parseFloat(balance) + parseFloat(adcBalance))
-        alert("Deposito realizado!")
+        setType('success')
+        setMessage("Depósito realizado!")
+        setModalMessage(true)
     }
 
     return (
@@ -61,6 +74,9 @@ export function ModalDep({balance,setBalance,setModalDep}) {
                     />
                 </View>
             </View>
+            <Modal visible={modalMessage} animationType='fade' transparent={true}>
+                <ModalMessage setModalMessage={setModalMessage} type={type} message={message} setModal={setModalDep}/>
+            </Modal>
         </View>
     )
 }

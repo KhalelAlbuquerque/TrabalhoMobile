@@ -7,6 +7,7 @@ import { ModalSaq } from './components/ModalSaq';
 import { ModalComoFunciona }from './components/ModalComoFunciona';
 import { ModalComoJogar }from './components/ModalComoJogar';
 import { ModalResult } from './components/ModalResult'
+import { ModalMessage } from './components/ModalMessage'
 
 export function Game() {
     const navigation = useNavigation()
@@ -29,6 +30,9 @@ export function Game() {
     const [winner, setWinner] = useState(false)
     const [valueNotification, setValueNotification] = useState(0)
     const [numSorteado, setNumSorteado] = useState(0)
+    const [modalMessage, setModalMessage] = useState(false)
+    const [message, setMessage] = useState('')
+    const [type, setType] = useState('')
 
 
     function calculateMultiplicador(value) {
@@ -65,7 +69,9 @@ export function Game() {
     function fazerAposta(e) {
         e.preventDefault()
         if(aposta.includes(',') || valorTextInput.includes(',')) {
-            alert("Digite um numero sem vírgulas! (Use ponto)")
+            setType('warning')
+            setMessage("Digite um número sem vírgulas! (Use ponto)")
+            setModalMessage(true)
             return 0
         }
 
@@ -95,9 +101,13 @@ export function Game() {
                 }
             }, 1400);
         }else if(isNaN(valorAposta)) {
-            alert("Digite um valor para apostar")
+            setType('warning')
+            setMessage("Digite um valor para apostar")
+            setModalMessage(true)
         }else{
-            alert('Saldo insuficiente');
+            setType('warning')
+            setMessage("Saldo insuficiente")
+            setModalMessage(true)
         }
     }
 
@@ -112,7 +122,9 @@ export function Game() {
             setWin(ChanceDeGanhar(novoValor).toFixed(2));
         } else if(novoValor<0 || novoValor>98){
             setValorTextInput('50');
-            alert("Digite um número de 2 á 98")
+            setType('warning')
+            setMessage("Digite um número de 2 a 98")
+            setModalMessage(true)
             setSize(50)
             setMultiplicador(calculateMultiplicador(50))
             setWin(ChanceDeGanhar(50).toFixed(2))
@@ -296,6 +308,9 @@ export function Game() {
             </Modal>
             <Modal visible={modalResult} animationType='fade' transparent={true}>
                 <ModalResult setModalResult={setModalResult} numeroSorteado={numSorteado} valorRecebido={valueNotification} winner={winner}/>
+            </Modal>
+            <Modal visible={modalMessage} animationType='fade' transparent={true}>
+                <ModalMessage setModalMessage={setModalMessage} type={type} message={message}/>
             </Modal>
         </ScrollView>
     )
