@@ -6,6 +6,7 @@ import { ModalDep } from './components/ModalDep';
 import { ModalSaq } from './components/ModalSaq';
 import { ModalComoFunciona }from './components/ModalComoFunciona';
 import { ModalComoJogar }from './components/ModalComoJogar';
+import { ModalResult } from './components/ModalResult'
 
 export function Game() {
     const navigation = useNavigation()
@@ -24,6 +25,10 @@ export function Game() {
     const [modalSaq,setModalSaq] = useState(false)
     const [modalComoJogar, setModalComoJogar] = useState(false)
     const [modalComoFunciona, setModalComoFunciona] = useState(false)
+    const [modalResult, setModalResult] = useState(false)
+    const [winner, setWinner] = useState(false)
+    const [valueNotification, setValueNotification] = useState(0)
+    const [numSorteado, setNumSorteado] = useState(0)
 
 
     function calculateMultiplicador(value) {
@@ -72,12 +77,18 @@ export function Game() {
             setTimeout(() => {
                 if (aposta) {
                     const numeroAleatorio = (Math.random() * 100).toFixed(0);
+                    setNumSorteado(numeroAleatorio)
                 if (numeroAleatorio > size) {
-                    alert(`Ganhou! Valor que recebeu: R$${(aposta * multiplicador).toFixed(2)} Número sorteado: ${ + numeroAleatorio}`);
+                    // alert(`Ganhou! Valor que recebeu: R$${(aposta * multiplicador).toFixed(2)} Número sorteado: ${ + numeroAleatorio}`);
+                    setValueNotification((aposta*multiplicador).toFixed(2))
+                    setWinner(true)
+                    setModalResult(true)
                     const novoBalance = (parseFloat(balance) + (aposta * multiplicador - aposta)).toFixed(2);
                     setBalance(novoBalance);
                 } else {
-                    alert('Perdeu! ' + `Número sorteado: ${ + numeroAleatorio}`);
+                    setValueNotification(0)
+                    setWinner(false)
+                    setModalResult(true)
                     const novoBalance = (balance - aposta).toFixed(2);
                     setBalance(novoBalance);
                     }
@@ -282,6 +293,9 @@ export function Game() {
             </Modal>
             <Modal visible={modalComoFunciona} animationType='fade' transparent={true}>
                 <ModalComoFunciona setModalComoFunciona={setModalComoFunciona}/>
+            </Modal>
+            <Modal visible={modalResult} animationType='fade' transparent={true}>
+                <ModalResult setModalResult={setModalResult} numeroSorteado={numSorteado} valorRecebido={valueNotification} winner={winner}/>
             </Modal>
         </ScrollView>
     )
