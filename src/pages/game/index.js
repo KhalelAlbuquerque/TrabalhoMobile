@@ -155,29 +155,21 @@ export function Game() {
                             color={'white'}
                         />
                     </View>
-                    <TouchableOpacity  onPress={toggleOptions}  style={{ marginLeft:'auto', marginRight: 'auto',backgroundColor: '#DCD0D1',marginBottom: 20, alignItems: 'center', padding: 8,borderRadius: 10}}>
+                    <TouchableOpacity  onPress={toggleOptions}  style={mostrarOpcoes ? styles.enabledOpacity : styles.disabledOpacity}>
                         <Text style={{width: '80%', textAlign: 'center',fontSize: 24,color: '#fdfdfd',fontWeight: 'bold'}}>
                             SALDO: <Text style={{color: '#525252'}}>R${balance} <Text style={{color:'red'}}>{arrowSaldo}</Text></Text>
                         </Text>
                         
                         {mostrarOpcoes && (
-                            <View>
-                                <View style={{marginBottom: 5}}>
-                                    <Button
-                                        style={{textAlign: 'center', fontWeight: 'bold'}}
-                                        title='Depositar'
-                                        onPress={() => {setModalDep(true); toggleOptions()}}
-                                        color={'white'}
-                                    />
-                                </View>
-                                <View>
-                                    <Button
-                                        style={{textAlign: 'center', fontWeight: 'bold'}}
-                                        title='Sacar'
-                                        onPress={() => {setModalSaq(true); toggleOptions()}}
-                                        color={'white'}
-                                    />
-                                </View>
+                            <View style={{marginTop: 5}}>
+                                <TouchableOpacity onPress={() => {setModalDep(true); toggleOptions()}} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: 180, height: 40}}>
+                                    <Image style={{width:25, height:25}} source={require('../../public/img/deposit.png')}/>
+                                    <Text style={{fontSize: 16, marginLeft: 10}}>Depositar</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={() => {setModalSaq(true); toggleOptions()}} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: 180, height: 40}}>
+                                    <Image style={{width:25, height:25}} source={require('../../public/img/withdraw.png')}/>
+                                    <Text style={{fontSize: 16, marginLeft: 10}}>Sacar</Text>
+                                </TouchableOpacity>
                             </View>
                         )}
                     </TouchableOpacity>
@@ -337,6 +329,26 @@ const styles = StyleSheet.create({
         marginLeft: 'auto', 
         marginRight:'auto', 
         zIndex: 99
+    },
+    disabledOpacity:{ 
+        marginLeft:'auto',
+        marginRight: 'auto',
+        backgroundColor: '#DCD0D1',
+        marginBottom: 20, 
+        alignItems: 'center', 
+        padding: 8,
+        borderRadius: 10
+    },
+    enabledOpacity:{ 
+        marginLeft:'auto',
+        marginRight: 'auto',
+        backgroundColor: '#DCD0D1',
+        marginBottom: 20, 
+        alignItems: 'center', 
+        padding: 8,
+        borderRadius: 10,
+        borderColor: '3b3b3b',
+        borderWidth: 1
     },
     apostaContainer:{
         width: '100%', 
