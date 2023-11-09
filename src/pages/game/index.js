@@ -43,6 +43,12 @@ export function Game() {
         return 100 - value;
     }
 
+    function sendMessage(type, message){
+        setType(type)
+        setMessage(message)
+        setModalMessage(true)
+    }
+
     function handleChange(value) {
         setSize(value.toFixed(0));
         const novoMultiplicador = calculateMultiplicador(value);
@@ -69,9 +75,7 @@ export function Game() {
     function fazerAposta(e) {
         e.preventDefault()
         if(aposta.includes(',') || valorTextInput.includes(',')) {
-            setType('warning')
-            setMessage("Digite um número sem vírgulas! (Use ponto)")
-            setModalMessage(true)
+            sendMessage('warning', 'Digite um número sem virgulas! (Use ponto)')
             return 0
         }
 
@@ -101,13 +105,9 @@ export function Game() {
                 }
             }, 1400);
         }else if(isNaN(valorAposta)) {
-            setType('warning')
-            setMessage("Digite um valor para apostar")
-            setModalMessage(true)
+            sendMessage('warning', "Digite um valor para apostar")
         }else{
-            setType('warning')
-            setMessage("Saldo insuficiente")
-            setModalMessage(true)
+            sendMessage('warning', "Saldo insuficiente")
         }
     }
 
@@ -121,10 +121,8 @@ export function Game() {
             setMultiplicador(novoMultiplicador);
             setWin(ChanceDeGanhar(novoValor).toFixed(2));
         } else if(novoValor<0 || novoValor>98){
+            sendMessage('warning', "Digite um número de 2 a 98")
             setValorTextInput('50');
-            setType('warning')
-            setMessage("Digite um número de 2 a 98")
-            setModalMessage(true)
             setSize(50)
             setMultiplicador(calculateMultiplicador(50))
             setWin(ChanceDeGanhar(50).toFixed(2))

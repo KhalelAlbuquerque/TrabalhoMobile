@@ -9,38 +9,31 @@ export function ModalSaq({ balance, setBalance, setModalSaq }) {
     const [message, setMessage] = useState('')
     const [type, setType] = useState('')
 
-    // setType('warning')
-    // setMessage("Saldo insuficiente")
-    // setModalMessage(true)
+    function sendMessage(type, message){
+        setType(type)
+        setMessage(message)
+        setModalMessage(true)
+    }
+
 
     function handleClick() {
         if(isNaN(removeBalance)){
-            setType('warning')
-            setMessage("Digite um valor válido pra saque")
-            setModalMessage(true)
+            sendMessage('warning', 'Digite um valor válido pra saque')
             return
         }
         if(removeBalance.includes(',')){
-            setType('warning')
-            setMessage("Digite um número sem virgulas pra saque (use ponto)")
-            setModalMessage(true)
+            sendMessage('warning', 'Digite um número sem vírgulas pra saque (use ponto)')
             return
         }
         const novoValor = parseFloat(removeBalance).toFixed(2)
         if((parseFloat(balance) - parseFloat(novoValor)<0)){
-            setType('warning')
-            setMessage("Saldo insuficiente pra saque")
-            setModalMessage(true)
+            sendMessage('warning', 'Saldo insuficiente pra saque')
             return
         }else if(isNaN(novoValor) || novoValor == 0){
-            setType('warning')
-            setMessage("Digite um valor válido pra saque")
-            setModalMessage(true)
+            sendMessage('warning', 'Digite um valor válido pra saque')
             return
         }
-        setType('success')
-        setMessage("Saque realizado!")
-        setModalMessage(true)
+        sendMessage('success', 'Saque realizado!')
         setBalance(parseFloat(balance) - parseFloat(novoValor))
     }
 

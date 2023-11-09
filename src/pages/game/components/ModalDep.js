@@ -9,35 +9,31 @@ export function ModalDep({balance,setBalance,setModalDep}) {
     const [message, setMessage] = useState('')
     const [type, setType] = useState('')
 
+    function sendMessage(type, message){
+        setType(type)
+        setMessage(message)
+        setModalMessage(true)
+    }
+
     function handleClick () {
         if(isNaN(adcBalance)){
-            setType('warning')
-            setMessage("Digite um valor válido pra deposito")
-            setModalMessage(true)
+            sendMessage('warning', 'Digite um valor válido pra depósito')
             return
         }
         if(adcBalance.includes(',')){
-            setType('warning')
-            setMessage("Digite um número sem virgulas pra deposito (use ponto)")
-            setModalMessage(true)
+            sendMessage('warning', "Digite um número sem virgulas pra deposito (use ponto)")
             return
         }
         const novoValor = parseFloat(adcBalance).toFixed(2)
         if((parseFloat(balance) + parseFloat(novoValor)>1000)){
-            setType('warning')
-            setMessage("Saldo maximo na plataforma: R$ 1000")
-            setModalMessage(true)
+            sendMessage('warning', 'Saldo maximo na plataforma: R$ 1000')
             return
         }else if(isNaN(novoValor) || novoValor == 0){
-            setType('warning')
-            setMessage("Digite um valor válido pra deposito")
-            setModalMessage(true)
+            sendMessage('warning', 'Digite um valor válido pra deposito')
             return
         }
         setBalance(parseFloat(balance) + parseFloat(adcBalance))
-        setType('success')
-        setMessage("Depósito realizado!")
-        setModalMessage(true)
+        sendMessage('success', 'Depósito realizado!')
     }
 
     return (
