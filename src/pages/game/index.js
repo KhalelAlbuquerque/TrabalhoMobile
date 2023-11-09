@@ -33,10 +33,15 @@ export function Game() {
     const [modalMessage, setModalMessage] = useState(false)
     const [message, setMessage] = useState('')
     const [type, setType] = useState('')
+    const [desactiveButton, setDesactiveButton] = useState(false)
 
 
     function calculateMultiplicador(value) {
-        return (99 / (100 - value)).toFixed(4);
+        const valor = (99 / (100 - value))
+        if(valor>=10){
+            return valor.toFixed(3)
+        }
+        return valor.toFixed(4);
     }
 
     function ChanceDeGanhar(value) {
@@ -80,7 +85,7 @@ export function Game() {
         }
 
         const valorAposta = parseFloat(aposta);
-        const saldo = parseFloat(balance);
+        const saldo = parseFloat(balance).toFixed(2);
 
         if (!isNaN(valorAposta) && valorAposta <= saldo) {
             rollDice()
@@ -137,8 +142,12 @@ export function Game() {
 
     function rollDice(){
         setDiceRoll(true)
+        setDesactiveButton(true)
         setTimeout(() => {
             setDiceRoll(false)
+            setTimeout(() => {
+                setDesactiveButton(false)
+            }, 100);
         }, 1400);
     }
 
@@ -162,11 +171,11 @@ export function Game() {
                         
                         {mostrarOpcoes && (
                             <View style={{marginTop: 5}}>
-                                <TouchableOpacity onPress={() => {setModalDep(true); toggleOptions()}} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: 180, height: 40}}>
+                                <TouchableOpacity onPress={() => {setModalDep(true); toggleOptions()}} style={styles.option}>
                                     <Image style={{width:25, height:25}} source={require('../../public/img/deposit.png')}/>
                                     <Text style={{fontSize: 16, marginLeft: 10}}>Depositar</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity onPress={() => {setModalSaq(true); toggleOptions()}} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: 180, height: 40}}>
+                                <TouchableOpacity onPress={() => {setModalSaq(true); toggleOptions()}} style={styles.option}>
                                     <Image style={{width:25, height:25}} source={require('../../public/img/withdraw.png')}/>
                                     <Text style={{fontSize: 16, marginLeft: 10}}>Sacar</Text>
                                 </TouchableOpacity>
@@ -195,6 +204,7 @@ export function Game() {
                 </View>
                 <View style={styles.spin}>
                     <Slider
+                        disabled={desactiveButton}
                         style={styles.slider}
                         minimumValue={2}
                         maximumValue={98}
@@ -222,6 +232,7 @@ export function Game() {
                 <View style={[styles.operations]}>
                     <Text style={[styles.textStyle2,{marginBottom: 5, fontSize: 12}]} aria-label="Label for Username" nativeID="labelUsername">Rolar Acima</Text>
                     <TextInput
+                        editable={!desactiveButton}
                         value={valorTextInput}
                         placeholder={size.toString()}
                         onChangeText={handleTextInputChange}
@@ -245,17 +256,18 @@ export function Game() {
                 </View>
                 <View>
                     <TextInput
+                        editable={!desactiveButton}
                         value={aposta.toString()}
                         placeholder="Valor para apostar"
                         style={styles.inputAposta}
-                        onChangeText={(text) => setAposta(text)}
+                        onChangeText={(text) =>setAposta(text)}
                         keyboardType="numeric"
                         onSubmitEditing={fazerAposta}
                         placeholderTextColor={'black'}
                     />
                 </View>
                 <View style={styles.buttonContainer}>
-                    <Button style={{borderRadius: 15}} color={'white'} title="Apostar" onPress={fazerAposta} />
+                    <Button style={{borderRadius: 15}} disabled={desactiveButton} color={'white'} title="Apostar" onPress={fazerAposta} />
                 </View>
                 <View style={{ width: '100%'}}>
                     <Text style={[styles.apostaEntry,styles.textStyle2,{marginTop: 7,marginBottom: 7}]}>
@@ -270,6 +282,7 @@ export function Game() {
             <View style={styles.infosOrganizer}>
                 <View style={{backgroundColor: 'gray', color:"#525252",  fontSize: '3rem', width: "45%", marginTop: 10, borderRadius: 10}}>
                     <Button
+                        disabled={desactiveButton}
                         title='COMO JOGAR?'
                         onPress={() => setModalComoJogar(true)}
                         color={'white'}
@@ -277,6 +290,7 @@ export function Game() {
                 </View>
                 <View style={{backgroundColor: 'gray', color:"#525252",  fontSize: '3rem', width: "45%", marginTop: 10, borderRadius: 10}}>
                     <Button
+                        disabled={desactiveButton}
                         title='COMO FUNCIONA?'
                         onPress={() => setModalComoFunciona(true)}
                         color={'white'}
@@ -350,6 +364,14 @@ const styles = StyleSheet.create({
         borderColor: '3b3b3b',
         borderWidth: 1
     },
+    option:{ 
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 180,
+        height: 40
+},
     apostaContainer:{
         width: '100%', 
         backgroundColor: '#DCD0D1', 

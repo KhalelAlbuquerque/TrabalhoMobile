@@ -34,7 +34,7 @@ export function ModalSaq({ balance, setBalance, setModalSaq }) {
             return
         }
         sendMessage('success', 'Saque realizado!')
-        setBalance(parseFloat(balance) - parseFloat(novoValor))
+        setBalance((parseFloat(balance) - parseFloat(novoValor)).toFixed(2))
     }
 
     return (

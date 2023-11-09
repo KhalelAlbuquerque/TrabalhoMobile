@@ -32,7 +32,7 @@ export function ModalDep({balance,setBalance,setModalDep}) {
             sendMessage('warning', 'Digite um valor válido pra deposito')
             return
         }
-        setBalance(parseFloat(balance) + parseFloat(adcBalance))
+        setBalance((parseFloat(balance) + parseFloat(adcBalance)).toFixed(2))
         sendMessage('success', 'Depósito realizado!')
     }
 

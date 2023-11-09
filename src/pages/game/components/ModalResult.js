@@ -1,4 +1,4 @@
-import { View , Text, StyleSheet, Button, Image } from 'react-native';
+import { View , Text, StyleSheet, Button, Image, TouchableOpacity } from 'react-native';
 
 export function ModalResult({setModalResult, numeroSorteado, valorRecebido, winner}){
 
@@ -19,13 +19,9 @@ export function ModalResult({setModalResult, numeroSorteado, valorRecebido, winn
                         <Text style={{fontWeight: 'bold', fontSize:16, textAlign: 'center'}}>Número sorteado: {numeroSorteado}</Text>
                         <Text style={{fontWeight: 'bold', fontSize:16, textAlign: 'center'}}>Valor recebido: <Text style={{color: 'green', fontSize: 20}}>R$ {valorRecebido}</Text></Text>
                     </View>
-                    <View style={styles.confirmButton}>
-                        <Button 
-                            title='Continuar'
-                            onPress={closeModal}
-                            color={'white'}
-                        />
-                    </View>
+                    <TouchableOpacity onPress={closeModal} style={styles.confirmButton}>
+                        <Text style={{color: 'white', fontSize:16, fontWeight:'bold'}}>Continuar</Text>
+                    </TouchableOpacity>
                 </View>
             ) : (
                 <View style={styles.model}>
@@ -36,13 +32,9 @@ export function ModalResult({setModalResult, numeroSorteado, valorRecebido, winn
                     <View style={{marginTop: 20}}>
                         <Text style={{fontWeight: 'bold', fontSize:16, textAlign: 'center'}}>Número sorteado: {numeroSorteado}</Text>
                     </View>
-                    <View style={styles.confirmButton}>
-                        <Button 
-                            title='Continuar'
-                            onPress={closeModal}
-                            color={'white'}
-                        />
-                    </View>
+                    <TouchableOpacity onPress={closeModal} style={styles.confirmButton}>
+                        <Text style={{color: 'white', fontSize:16, fontWeight:'bold'}}>Continuar</Text>
+                    </TouchableOpacity>
                 </View>
             )}
         </View>
@@ -65,7 +57,7 @@ const styles = StyleSheet.create({
     model:{
         backgroundColor:'#fff',
         width: '80%',
-        height:'30%',
+        height:'35%',
         display: 'flex',
         borderRadius: 20,
         flexDirection: 'column',
@@ -74,7 +66,11 @@ const styles = StyleSheet.create({
     },
     confirmButton:{
         width: '80%',
-        backgroundColor:'red',
+        height: 50,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor:'#BB0000',
         borderRadius: 10,
         marginTop: 20
     }
