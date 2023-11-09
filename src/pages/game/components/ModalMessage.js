@@ -1,4 +1,5 @@
 import { View , Text, StyleSheet, Button, Image } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 
 export function ModalMessage({setModalMessage, type, message, setModal = null}){
 
@@ -14,24 +15,17 @@ export function ModalMessage({setModalMessage, type, message, setModal = null}){
         <View style={styles.modelContainer}>
             <View style={styles.model}>
                 <View style={{display:'flex', flexDirection: 'column', alignItems:'center'}}>
-                    {type === 'success' ? (
-                        <Image style={{height: 80, width: 80}} source={require('../../../public/img/checked.png')}/>
-                    ):(
-                        type === 'error' ? (
-                            <Image style={{height: 80, width: 80}} source={require('../../../public/img/lose.png')}/>
-                        ):(
-                            <Image style={{height: 80, width: 80}} source={require('../../../public/img/warning.png')}/>
-                        )
-                    )}
+                    <Image style={{height: 80, width: 80}} source={
+                        type ==='success' ? require('../../../public/img/checked.png') :
+                        type === 'error' ? require('../../../public/img/lose.png') :
+                        require('../../../public/img/warning.png')
+                    }/>
+                    
                     <Text style={{fontSize:24, fontWeight: 'bold', textAlign: 'center'}}>{message}</Text>
                 </View>
-                <View style={styles.confirmButton}>
-                    <Button 
-                        title='Continuar'
-                        onPress={closeModal}
-                        color={'white'}
-                    />
-                </View>
+                <TouchableOpacity onPress={closeModal} style={styles.confirmButton}>
+                    <Text style={{color:'white', fontSize: 16, fontWeight: 'bold'}}>Continuar</Text>
+                </TouchableOpacity>
             </View>
         </View>
     )
@@ -59,11 +53,16 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingHorizontal: 20
     },
     confirmButton:{
-        width: '80%',
-        backgroundColor:'red',
+        width: '100%',
+        height: 50,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor:'#BD0000',
         borderRadius: 10,
         marginTop: 20
     }

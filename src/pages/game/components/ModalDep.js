@@ -62,13 +62,9 @@ export function ModalDep({balance,setBalance,setModalDep}) {
                     placeholderTextColor="gray"
                     onSubmitEditing={handleClick}
                 />
-                <View style={styles.buttonContainer}>
-                    <Button
-                        title='Confirmar depósito'
-                        onPress={handleClick}
-                        color={'white'}
-                    />
-                </View>
+                <TouchableOpacity onPress={handleClick} style={styles.buttonContainer}>
+                    <Text style={{color:'white', fontSize: 16, fontWeight: 'bold'}}>Confirmar Despósito</Text>
+                </TouchableOpacity>
             </View>
             <Modal visible={modalMessage} animationType='fade' transparent={true}>
                 <ModalMessage setModalMessage={setModalMessage} type={type} message={message} setModal={setModalDep}/>
@@ -118,7 +114,7 @@ const styles = StyleSheet.create({
         left: 10
     },
     closeButton: {
-        fontSize: 24,
+        fontSize: 32,
         fontWeight: 'bold'
     },
     buttonContainer:{

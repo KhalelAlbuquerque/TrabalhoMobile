@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, Button, TouchableOpacity, Modal } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, Modal } from 'react-native';
 import { ModalMessage } from './ModalMessage';
 
 export function ModalSaq({ balance, setBalance, setModalSaq }) {
@@ -63,13 +63,9 @@ export function ModalSaq({ balance, setBalance, setModalSaq }) {
                     color="black"
                     onSubmitEditing={handleClick}
                 />
-                <View style={styles.buttonContainer}>
-                    <Button
-                        title='Confirmar saque'
-                        onPress={handleClick}
-                        color={'white'}
-                    />
-                </View>
+                <TouchableOpacity onPress={handleClick} style={styles.buttonContainer}>
+                    <Text style={{color:'white', fontSize: 16, fontWeight: 'bold'}}>Confirmar Saque</Text>
+                </TouchableOpacity>
             </View>
             <Modal visible={modalMessage} animationType='fade' transparent={true}>
                 <ModalMessage setModalMessage={setModalMessage} type={type} message={message} setModal={setModalSaq}/>
@@ -119,16 +115,16 @@ const styles = StyleSheet.create({
         left: 10
     },
     closeButton: {
-        fontSize: 24,
+        fontSize: 32,
         fontWeight: 'bold'
     },
     buttonContainer:{
-        backgroundColor: '#BD0000',
-        width:"80%",
-        borderRadius: 10,
+        width: '80%',
         height: 50,
-        display:'flex',
-        alignItems:'center',
-        justifyContent:'center'
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor:'#BD0000',
+        borderRadius: 10
     }
 })
