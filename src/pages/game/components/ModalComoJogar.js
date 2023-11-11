@@ -23,7 +23,7 @@ export function ModalComoJogar({setModalComoJogar}){
                         <View>
                             <Slider 
                                 minimumValue={1}
-                                maximumValue={100}
+                                maximumValue={1}
                                 step={0}
                                 maximumTrackTintColor='green'
                                 minimumTrackTintColor='red'
@@ -47,8 +47,8 @@ export function ModalComoJogar({setModalComoJogar}){
                             Depois, aperte no botão de "Apostar" para completar sua aposta e aguardar o resultado
                         </Text>
                         <View style={styles.buttonContainer}>
-                                <Button style={{borderRadius: 15}} color={'white'} title="Apostar" onPress={()=>{}} />
-                            </View>
+                            <Button style={{borderRadius: 15}} color={'white'} title="Apostar" />
+                        </View>
                     </View>
                 </View>
             </View>
